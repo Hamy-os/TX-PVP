@@ -11,7 +11,11 @@
   "dependencies": {
     "@citizenfx/client": "^1.0.3575-1",
     "@citizenfx/server": "^1.0.3575-1",
-    "@types/node": "^14.14.31"
+    "@types/mysql": "^2.15.18",
+    "@types/node": "^14.14.31",
+    "dotenv": "^8.2.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5"
   },
   "devDependencies": {
     "remove-files-webpack-plugin": "^1.4.4",
