@@ -1,9 +1,9 @@
 import { Teams, ServerId, Team } from "../typings";
-import { getPlayerIdentifier } from "./";
+import { getPlayerIdentifier, Member } from "./";
 let players: Teams = { DEA: {}, NARCO: {} }
 
 export function addPlayerToTeam(serverId: ServerId, team: Team) {
-  players[team][serverId] = {serverId: serverId, name: GetPlayerName(serverId), identifier: getPlayerIdentifier(serverId) as string}
+  players[team][serverId] = new Member(serverId)
 }
 
 export function getTeams(): Teams {
