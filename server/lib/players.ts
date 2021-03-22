@@ -9,3 +9,9 @@ export function addPlayerToTeam(serverId: ServerId, team: Team) {
 export function getTeams(): Teams {
   return players
 }
+
+export function getPlayerTeam(serverId: ServerId): Team {
+  for (const [k, v] of Object.entries(players)) {
+  if (v[serverId]) {return k as Team}
+  }
+}
