@@ -9,6 +9,7 @@ export class Member {
   }
     // TODO! testing
   public coords(): Vector3 {
-    return GetEntityCoords(GetPlayerPed(this.player.serverId)) as unknown as Vector3 // weird ass type cast 
+    const crs = GetEntityCoords(GetPlayerPed(this.player.serverId))
+    return new Vector3(crs[0], crs[1], crs[2]) 
   }
 }
