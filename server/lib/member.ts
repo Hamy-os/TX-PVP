@@ -1,6 +1,6 @@
 import { Vector3 } from "fivem-js";
 import { Teams, ServerId, Identifier, Player } from "../typings";
-import { getPlayerIdentifier } from "./";
+import { getPlayerIdentifier, wrapIntoVec3 } from "./";
 
 export class Member {
   private player: Player
@@ -9,7 +9,6 @@ export class Member {
   }
     // TODO! testing
   public coords(): Vector3 {
-    const crs = GetEntityCoords(GetPlayerPed(this.player.serverId))
-    return new Vector3(crs[0], crs[1], crs[2]) 
+    return wrapIntoVec3(GetEntityCoords(GetPlayerPed(this.player.serverId)))
   }
 }
