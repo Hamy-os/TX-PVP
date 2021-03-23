@@ -1,9 +1,11 @@
 import * as Cfx from 'fivem-js';
 import { giveLoadoutToPlayer } from "./lib/loadouts";
+
+
+
 RegisterCommand("warpIsland", async (source: string, args: string[]) => {
   emit("TXPVP:CORE:loadIsland");
   giveLoadoutToPlayer("basic", "DEA")
-  
 }, true);
 
 

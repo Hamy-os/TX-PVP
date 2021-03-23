@@ -14,4 +14,8 @@ export class Member {
   public set setLoadout(loadout: string) {
     emitNet("TXPVP:CORE:setLoadout", this.player.serverId, loadout, this.player.team)
   }
+  
+  public spawn(loc: Vector3) {
+    emitNet("TXPVP:CORE:spawnPlayer", this.player.serverId, loc)
+  }
 }
