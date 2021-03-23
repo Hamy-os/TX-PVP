@@ -9,6 +9,6 @@ export function getRandomLocationOnIsland() {
 
 
 RegisterCommand("tp", (source: string, args: string[]) => {
-  Cfx.Game.PlayerPed.Position = spawnLocations[args[0]] || spawnLocations["airField"]
+  Cfx.Game.PlayerPed.Position = spawnLocations.get(args[0]) || spawnLocations.get("airField")
 }, true)
 
