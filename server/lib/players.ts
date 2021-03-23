@@ -3,7 +3,7 @@ import { getPlayerIdentifier, Member } from "./";
 const players: Teams = { DEA: {}, NARCO: {} }
 
 export function addPlayerToTeam(serverId: ServerId, team: Team) {
-  players[team][serverId] = new Member(serverId)
+  players[team][serverId] = new Member(serverId, team)
 }
 
 export function getTeams(): Teams {

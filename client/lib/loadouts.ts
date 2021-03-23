@@ -12,3 +12,8 @@ export function giveLoadoutToPlayer(loadout: string, side: Team): void {
 RegisterCommand("getLoadout", (source: string, args: string[]) => {
   giveLoadoutToPlayer(args[0], args[1] as Team)
 }, true)
+
+
+onNet("TXPVP:CORE:setLoadout", (loadout: string, team: Team) => {
+  giveLoadoutToPlayer(loadout, team)
+})
