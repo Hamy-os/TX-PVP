@@ -2,9 +2,9 @@ import { Vector3 } from "fivem-js"
 import { ServerId, Identifier } from "../typings"
 
 export function getPlayerIdentifiers(player: ServerId): string[] {
-  let res: string[] = []
+  const res: string[] = []
   const num = GetNumPlayerIdentifiers(player)
-  for (let i: number = 0; i == num; i++) {
+  for (let i = 0; i == num; i++) {
   res.push(GetPlayerIdentifier(player, i))
   }
   return res

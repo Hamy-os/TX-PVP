@@ -1,6 +1,6 @@
 import { Teams, ServerId, Team } from "../typings";
 import { getPlayerIdentifier, Member } from "./";
-let players: Teams = { DEA: {}, NARCO: {} }
+const players: Teams = { DEA: {}, NARCO: {} }
 
 export function addPlayerToTeam(serverId: ServerId, team: Team) {
   players[team][serverId] = new Member(serverId)
