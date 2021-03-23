@@ -1,6 +1,5 @@
 import * as Cfx from 'fivem-js';
 
-
 RegisterCommand("warpIsland", async (source: string, args: string[]) => {
   emit("TXPVP:CORE:loadIsland");
 }, true);
