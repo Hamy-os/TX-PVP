@@ -1,5 +1,4 @@
 import { Vector3 } from "fivem-js"
-import { Map } from "../typings";
 export const spwn = new Map<string, Vector3>()
 
 spwn.set("airField", new Vector3(4504.017578125, -4534.1342773438, 4.1950516700745))
