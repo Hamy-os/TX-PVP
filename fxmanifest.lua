@@ -9,5 +9,4 @@ client_scripts {
     "coords.lua",
     "utils/client/*.lua",
     "dist/client/*.client.js",
-    "dist/client/*/*.client.js"
 } 
