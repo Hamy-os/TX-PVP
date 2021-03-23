@@ -18,6 +18,6 @@ export function getPlayerIdentifier(player: ServerId): Identifier | boolean {
   return false
 }
 
-export function wrapIntoVec3(arr: number[]): Vector3 {
+export function castVec3(arr: number[]): Vector3 {
   return new Vector3(arr[0], arr[1], arr[2])
 }

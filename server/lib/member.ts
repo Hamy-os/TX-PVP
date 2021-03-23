@@ -1,6 +1,6 @@
 import { Vector3 } from "fivem-js";
 import { Teams, ServerId, Identifier, Player, Team } from "../typings";
-import { getPlayerIdentifier, wrapIntoVec3 } from "./";
+import { getPlayerIdentifier, castVec3 } from "./";
 
 export class Member {
   private player: Player
@@ -9,7 +9,7 @@ export class Member {
   }
     // TODO! testing
   public get coords(): Vector3 {
-    return wrapIntoVec3(GetEntityCoords(GetPlayerPed(this.player.serverId)))
+    return castVec3(GetEntityCoords(GetPlayerPed(this.player.serverId)))
   }
   public set setLoadout(loadout: string) {
     emitNet("TXPVP:CORE:setLoadout", this.player.serverId, loadout, this.player.team)
