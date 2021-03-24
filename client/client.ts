@@ -1,10 +1,16 @@
 import * as Cfx from 'fivem-js';
 import { giveLoadoutToPlayer } from "./lib/loadouts";
-import {spawnLocations} from "./lib"
+import {spawnLocations, eventFn} from "./lib"
 import { Team } from "./typings";
 
+eventFn()
+
 RegisterCommand("warpIsland", async (source: string, args: string[]) => {
-  emit("TXPVP:CORE:loadIsland");
+  try {
+    emit("TXPVP:CORE:loadIsland", spawnLocations.get("airField"));
+  } catch (err) {
+    console.log("ERR", err)
+  }
   giveLoadoutToPlayer("basic", "DEA")
 }, true);
 
