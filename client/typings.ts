@@ -1,5 +1,5 @@
-export type WeaponString = string
-export type Loadout = { DEA: {[key: string]: WeaponString[] }, NARCO: {[key: string]: WeaponString[]} }
+export type LoadoutWeapon = { name: string, ammoCount: number }
+export type Loadout = { DEA: {[key: string]: LoadoutWeapon[] }, NARCO: {[key: string]: LoadoutWeapon[]} }
 export type Team = "DEA" | "NARCO"
 export type BlipSprite = number
 export type BlipColor = number

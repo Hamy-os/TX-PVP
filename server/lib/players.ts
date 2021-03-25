@@ -12,6 +12,6 @@ export function getTeams(): Teams {
 
 export function getPlayerTeam(serverId: ServerId): Team {
   for (const [k, v] of Object.entries(players)) {
-  if (v[serverId]) {return k as Team}
+      if (v[serverId]) {return k as Team}
   }
 }

@@ -1,14 +1,15 @@
 import * as Cfx from 'fivem-js';
-import { Loadout, Team, WeaponString } from "../typings"
+import { Loadout, Team, LoadoutWeapon } from "../typings"
 const loadOuts: Loadout = {
-  DEA: { "basic": ["weapon_militaryrifle", "weapon_marksmanrifle", "weapon_pumpshotgun_mk2", "WEAPON_COMBATPISTOL", "weapon_combatpdw"] },
-  NARCO: { "basic": ["WEAPON_ASSAULTRIFLE", "WEAPON_PUMPSHOTGUN", "weapon_pistol_mk2", "weapon_smg_mk2"] }
+  DEA: { "basic": [{ name: "weapon_militaryrifle", ammoCount: 9999 }, { name: "weapon_marksmanrifle", ammoCount: 9999 }, { name: "weapon_pumpshotgun_mk2", ammoCount: 9999 }, { name: "WEAPON_COMBATPISTOL", ammoCount: 9999 }, { name: "weapon_combatpdw", ammoCount: 9999}] },
+  NARCO: { "basic": [{name: "WEAPON_ASSAULTRIFLE", ammoCount: 9999}, {name: "WEAPON_PUMPSHOTGUN", ammoCount: 9999}, {name: "weapon_pistol_mk2", ammoCount: 9999}, {name: "weapon_smg_mk2", ammoCount: 9999}] }
 }
 
 export function giveLoadoutToPlayer(loadout: string, side: Team): void {
   RemoveAllPedWeapons(PlayerPedId(), false)
-  loadOuts[side][loadout].forEach((weapon: WeaponString) => {
-    Cfx.Game.PlayerPed.giveWeapon(GetHashKey(weapon), 9999, false, false)
+  loadOuts[side][loadout].forEach((weapon: LoadoutWeapon) => {
+    Cfx.Game.PlayerPed.giveWeapon(GetHashKey(weapon.name), weapon.ammoCount, false, false)
+    Cfx.Game.PlayerPed.giveWeapon(Cfx.WeaponHash.Parachute, 9999, false, false) // TODO! needs testing
   })
 }
 
