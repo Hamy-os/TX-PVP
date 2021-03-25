@@ -3,7 +3,7 @@ import { BlipSprite, BlipColor, BlipId, BlipVisibility } from "../typings";
 
 
 export class Blip {
-  private blipId: BlipId
+  private readonly blipId: BlipId
   public constructor(coords: Cfx.Vector3, sprite: BlipSprite, color: BlipColor, visibility: BlipVisibility, blipUtil?: (blipId: BlipId) => void) {
     this.blipId = AddBlipForCoord(coords.x, coords.y, coords.z)
     SetBlipColour(this.blipId, color)
