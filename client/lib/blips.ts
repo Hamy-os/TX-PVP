@@ -14,9 +14,23 @@ export class Blip {
   public hide(): void {
     SetBlipDisplay(this.blipId, 0)
   }
+  
   public show(): void {
     SetBlipDisplay(this.blipId, 6)
   }
+
+  public setDisplay(display: BlipVisibility): void {
+    SetBlipDisplay(this.blipId, display)
+  }
+
+  public setColor(color: BlipColor): void {
+    SetBlipColour(this.blipId, color)
+  }
+
+  public setSprite(sprite: BlipSprite): void {
+    SetBlipSprite(this.blipId, sprite)
+  }
+
   public override(control: (blipId: BlipId) => void): void {
     control(this.blipId)
   }
