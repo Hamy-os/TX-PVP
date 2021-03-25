@@ -8,9 +8,6 @@ export function loadIslandEventInit() { // if the event called without args it w
     Citizen.invokeNative('0xF74B1FFA4A15FBEA', true)
     Citizen.invokeNative('0x53797676AD34A9AA', false)
     SetScenarioGroupEnabled('Heist_Island_Peds', true)
-    if (coords) {
-      Cfx.Game.PlayerPed.Position = coords
-    }
   })
   
 } 
