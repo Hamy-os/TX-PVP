@@ -1,7 +1,7 @@
 import * as Cfx from 'fivem-js';
 import {spawnLocations} from "./coords";
 
-let playerCount = 0;
+const playerCount = 0;
 
 export function TestingFunction() {
     onNet("TXPVP:CORE:SPAWNPLAYERONLOBBY", (coords: Cfx.Vector3) => {
