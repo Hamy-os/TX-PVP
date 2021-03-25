@@ -7,7 +7,6 @@ TestingFunction()
 eventFn()
 
 RegisterCommand("join", async (source: string, args: string[]) => {
-  console.log("fuck you!!!!");
   emit("TXPVP:CORE:SPAWNPLAYERONLOBBY", (spawnLocations.get("lobbySpawn")))
   giveLoadoutToPlayer("basic", "NARCO")
 }, false);
