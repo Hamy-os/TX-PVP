@@ -58,7 +58,7 @@ export function setupMapEvents() { // if the event called without args it wont t
   onNet("TXPVP:CORE:unloadNorthYankton", () => {
     console.log("Unloading North Yankton")
     LoadMpDlcMaps()
-    EnableMpDlcMaps(false)
+    SetMinimapInPrologue(false)
     RemoveIpl("FIBlobbyfake")
     RemoveIpl("DT1_03_Gr_Closed")
     RemoveIpl("v_tunnel_hole")
