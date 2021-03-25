@@ -6,7 +6,6 @@ import { Team } from "./typings";
 
 setupLobbyEvents()
 setupMapEvents()
-
 RegisterCommand("join", async (source: string, args: string[]) => {
   emit("TXPVP:CORE:spawnPlayerOnLobby", (spawnLocations.get("lobbySpawn")))
   giveLoadoutToPlayer("basic", "NARCO")

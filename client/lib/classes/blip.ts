@@ -4,11 +4,14 @@ import { BlipSprite, BlipColor, BlipId, BlipVisibility } from "../../typings";
 
 export class Blip {
   private readonly blipId: BlipId
-  public constructor(coords: Cfx.Vector3, sprite: BlipSprite, color: BlipColor, visibility: BlipVisibility, blipUtil?: (blipId: BlipId) => void) {
+  public constructor(coords: Cfx.Vector3, sprite: BlipSprite, color: BlipColor, visibility: BlipVisibility, title: string, blipUtil?: (blipId: BlipId) => void) {
     this.blipId = AddBlipForCoord(coords.x, coords.y, coords.z)
     SetBlipColour(this.blipId, color)
     SetBlipSprite(this.blipId, sprite)
     SetBlipDisplay(this.blipId, visibility)
+    BeginTextCommandSetBlipName("STRING")
+      AddTextComponentString(title)
+      EndTextCommandSetBlipName(this.blipId)
     blipUtil(this.blipId)
   }
   public hide(): void {
@@ -33,5 +36,8 @@ export class Blip {
 
   public override(control: (blipId: BlipId) => void): void {
     control(this.blipId)
+  }
+  public get id(): BlipId {
+    return this.blipId
   }
 }
