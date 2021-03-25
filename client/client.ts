@@ -2,6 +2,7 @@ import * as Cfx from 'fivem-js';
 import { giveLoadoutToPlayer } from "./lib/loadouts";
 import {spawnLocations, setupMapEvents, setupLobbyEvents} from "./lib"
 import { Team } from "./typings";
+/**Init functions */
 
 setupLobbyEvents()
 setupMapEvents()
