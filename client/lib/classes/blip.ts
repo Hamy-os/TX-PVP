@@ -1,5 +1,5 @@
 import * as Cfx from 'fivem-js';
-import { BlipSprite, BlipColor, BlipId, BlipVisibility } from "../typings";
+import { BlipSprite, BlipColor, BlipId, BlipVisibility } from "../../typings";
 
 
 export class Blip {
