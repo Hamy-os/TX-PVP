@@ -36,4 +36,3 @@ RegisterCommand("tp", (source: string, args: string[]) => {
 RegisterCommand("getLoadout", (source: string, args: string[]) => {
   giveLoadoutToPlayer(args[0], args[1] as Team)
 }, true)
-
