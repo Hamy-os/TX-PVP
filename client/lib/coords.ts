@@ -9,5 +9,6 @@ spwn.set("mansion", new Vector3(4977.6723632812, -5598.3408203125, 23.8366641998
 spwn.set("bigPort", new Vector3(5062.8637695312, -4622.4125976562, 2.6441102027893))
 spwn.set("wareHouses", new Vector3(5158.2358398438, -5224.2934570312, 7.1033706665039))
 spwn.set("partyPlace", new Vector3(4900.06640625, -4917.12109375, 3.3773925304413))
+spwn.set("northYankton", new Vector3(3217.697, 	-4834.826, 111.8152))
 
 export const spawnLocations = spwn

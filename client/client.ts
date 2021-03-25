@@ -1,13 +1,13 @@
 import * as Cfx from 'fivem-js';
 import { giveLoadoutToPlayer } from "./lib/loadouts";
-import {spawnLocations, loadIslandEventInit} from "./lib"
+import {spawnLocations, setupMapEvents, setupLobbyEvents} from "./lib"
 import { Team } from "./typings";
-import { TestingFunction } from "./lib/lobby";
-TestingFunction()
-loadIslandEventInit()
+
+setupLobbyEvents()
+setupMapEvents()
 
 RegisterCommand("join", async (source: string, args: string[]) => {
-  emit("TXPVP:CORE:SPAWNPLAYERONLOBBY", (spawnLocations.get("lobbySpawn")))
+  emit("TXPVP:CORE:spawnPlayerOnLobby", (spawnLocations.get("lobbySpawn")))
   giveLoadoutToPlayer("basic", "NARCO")
 }, false);
 
@@ -35,4 +35,9 @@ RegisterCommand("getLoadout", (source: string, args: string[]) => {
 RegisterCommand("warpIsland", (source: string, args: string[]) => {
   emit("TXPVP:CORE:loadIsland")
   Cfx.Game.PlayerPed.Position = spawnLocations.get(args[0]) || spawnLocations.get("airField")
+}, true)
+
+RegisterCommand("warpYankton", (source: string, args: string[]) => {
+  emit("TXPVP:CORE:loadNorthYankton")
+  Cfx.Game.PlayerPed.Position = spawnLocations.get("northYankton")
 }, true)
