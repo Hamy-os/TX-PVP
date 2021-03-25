@@ -1,9 +1,9 @@
 import * as Cfx from 'fivem-js';
 import { giveLoadoutToPlayer } from "./lib/loadouts";
-import {spawnLocations, eventFn} from "./lib"
+import {spawnLocations, loadIslandEventInit} from "./lib"
 import { Team } from "./typings";
 
-eventFn()
+loadIslandEventInit()
 
 RegisterCommand("warpIsland", async (source: string, args: string[]) => {
   try {

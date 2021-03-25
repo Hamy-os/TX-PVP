@@ -1,6 +1,6 @@
 import * as Cfx from 'fivem-js';
 
-export function eventFn() {
+export function loadIslandEventInit() {
   onNet("TXPVP:CORE:loadIsland", (coords: Cfx.Vector3) => {
     console.log("Received event")
     Citizen.invokeNative('0x9A9D1BA639675CF1', "HeistIsland", true)
