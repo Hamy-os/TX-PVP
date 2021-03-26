@@ -2,6 +2,7 @@ import { Vector3 } from "fivem-js";
 import { Teams, ServerId, Identifier, Player, Team } from "../../typings";
 import { getPlayerIdentifier, castVec3 } from "../";
 
+
 export class Member {
   private player: Player
   public constructor(serverId: ServerId, team: Team) {
@@ -18,8 +19,11 @@ export class Member {
   public spawn(loc: Vector3): void {
     emitNet("TXPVP:CORE:spawnPlayer", this.player.serverId, loc)
   }
-
   public get team(): Team {
     return this.player.team
   }
+  public trigger(eventName: string, ...args: any): void {
+    emitNet(eventName, this.player.serverId, args)
+  }
+
 }
