@@ -53,6 +53,11 @@ function CloseCamera(): void {
 
 
 function ChangeCamera(index: number): void {
+  if (!cameraLocations[index]) {
+    index = 0
+  } else if (index == 0) {
+    index = cameraLocations.length - 1
+  }
   if (createdCamera != 0) {
     DestroyCam(createdCamera, false)
     createdCamera = 0
