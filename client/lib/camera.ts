@@ -3,46 +3,52 @@ import { cameraLocations } from "./";
 let cameraActive = false
 let createdCamera  = 0
 let camIndex = 0
-
-
-RegisterCommand("+cameraVisibility", () => {
-  openCamera()
-}, false)
-
-RegisterCommand("-cameraVisibility", () => {
-  CloseCamera()
-}, false)
-
-RegisterCommand("scrollCameraRight", () => {
-  if (cameraActive) {
-    ChangeCamera(camIndex++)
-  }
-}, false)
-
-RegisterCommand("scrollCameraLeft", () => {
-  if (cameraActive) {
-    ChangeCamera(camIndex--)
-  }
-}, false)
-
-RegisterKeyMapping('+cameraVisibility', 'Open your camera', 'keyboard', 'c')
-RegisterKeyMapping('scrollCameraRight', 'Next camera', 'keyboard', 'e')
-RegisterKeyMapping('scrollCameraLeft', 'Previous camera', 'keyboard', 'q')
+export function setUpCameraUtils(): void {
+  RegisterCommand("openCamera", () => {
+    openCamera()
+  }, false)
+  
+  RegisterCommand("closeCamera", () => {
+    CloseCamera()
+  }, false)
+  
+  RegisterCommand("scrollCameraRight", () => {
+    if (cameraActive) {
+      ChangeCamera(camIndex++)
+    }
+  }, false)
+  
+  RegisterCommand("scrollCameraLeft", () => {
+    if (cameraActive) {
+      ChangeCamera(camIndex--)
+    }
+  }, false)
+  
+  RegisterKeyMapping('openCamera', 'Open your camera', 'keyboard', 'b')
+  RegisterKeyMapping('closeCamera', 'Close your camera', 'keyboard', 'n')
+  RegisterKeyMapping('scrollCameraRight', 'Next camera', 'keyboard', 'e')
+  RegisterKeyMapping('scrollCameraLeft', 'Previous camera', 'keyboard', 'q')
+  
+}
 
 
 
 function openCamera() {
+  console.log("Opening camera")
   ChangeCamera(0)
+
   camIndex = 0
   SetFocusArea(cameraLocations[0].coords.x, cameraLocations[0].coords.y, cameraLocations[0].coords.z, cameraLocations[0].coords.x, cameraLocations[0].coords.y, cameraLocations[0].coords.z)
   FreezeEntityPosition(PlayerPedId(), true)
   DisplayRadar(false)
   cameraActive = true
+  
 }
 
 function CloseCamera(): void {
+  console.log("Closing camera, curr cam id: ", createdCamera)
   DestroyCam(createdCamera, false)
-  RenderScriptCams(true, false, 1, true, true)
+	RenderScriptCams(false, false, 1, true, true)
   createdCamera = 0
   ClearTimecycleModifier()
   SetFocusEntity(PlayerPedId())
