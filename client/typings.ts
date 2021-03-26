@@ -1,4 +1,3 @@
-import {Vector3} from "fivem-js"
 export type LoadoutWeapon = { name: string, ammoCount: number }
 export type Loadout = { DEA: {[key: string]: LoadoutWeapon[] }, NARCO: {[key: string]: LoadoutWeapon[]} }
 export type Team = "DEA" | "NARCO"

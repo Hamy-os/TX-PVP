@@ -1,5 +1,5 @@
 import { Vector3 } from "fivem-js";
-import { Teams, ServerId, Identifier, Player, Team } from "../../typings";
+import { ServerId, Identifier, Player, Team } from "../../typings";
 import { getPlayerIdentifier, castVec3 } from "../";
 
 
@@ -22,7 +22,7 @@ export class Member {
   public get team(): Team {
     return this.player.team
   }
-  public trigger(eventName: string, ...args: any): void {
+  public trigger(eventName: string, ...args: unknown[]): void {
     emitNet(eventName, this.player.serverId, args)
   }
 
