@@ -32,9 +32,9 @@ export class Cameras {
     RegisterKeyMapping('scrollCameraLeft', 'Previous camera', 'keyboard', 'q')
     
   }
-  public static openCamera(): void {
+  public static async openCamera(): Promise<void> {
     this.ChangeCamera(0)
-    const instructions = Cameras.CreateInstructionScaleform("instructional_buttons")
+    const instructions = await Cameras.CreateInstructionScaleform("instructional_buttons")
     Cameras.scaleformTick = setTick(() => {DrawScaleformMovieFullscreen(instructions, 255, 255, 255, 255, 0)})
     this.camIndex = 0
     SetTimecycleModifier("scanline_cam_cheap")
@@ -102,46 +102,53 @@ export class Cameras {
     EndTextCommandScaleformString()
   }
     
-  
-  public static CreateInstructionScaleform(scf: string): number {
-    const scaleform = RequestScaleformMovie(scf)
-    const loading = setInterval(() => {if (HasScaleformMovieLoaded(scaleform)) {clearInterval(loading)}}, 10)
-    PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
-    PopScaleformMovieFunctionVoid()
-    
-    PushScaleformMovieFunction(scaleform, "SET_CLEAR_SPACE")
-    PushScaleformMovieFunctionParameterInt(200)
-    PopScaleformMovieFunctionVoid()
-  
-    PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
-    PushScaleformMovieFunctionParameterInt(0)
-    this.InstructionButton(GetControlInstructionalButton(1, 175, 1))
-    this.InstructionButtonMessage("Go Forward")
-    PopScaleformMovieFunctionVoid()
-  
-    PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
-    PushScaleformMovieFunctionParameterInt(1)
-    this.InstructionButton(GetControlInstructionalButton(1, 194, 1))
-    this.InstructionButtonMessage("Close Camera")
-    PopScaleformMovieFunctionVoid()
-  
-    PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
-    PushScaleformMovieFunctionParameterInt(2)
-    this.InstructionButton(GetControlInstructionalButton(1, 174, 1))
-    this.InstructionButtonMessage("Go Back")
-    PopScaleformMovieFunctionVoid()
-  
-    PushScaleformMovieFunction(scaleform, "DRAW_INSTRUCTIONAL_BUTTONS")
-    PopScaleformMovieFunctionVoid()
-  
-    PushScaleformMovieFunction(scaleform, "SET_BACKGROUND_COLOUR")
-    PushScaleformMovieFunctionParameterInt(0)
-    PushScaleformMovieFunctionParameterInt(0)
-    PushScaleformMovieFunctionParameterInt(0)
-    PushScaleformMovieFunctionParameterInt(80)
-    PopScaleformMovieFunctionVoid()
-  
-    return scaleform
+  private static async loadScaleForm(scaleform: number): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const interval = setInterval(() => { if (HasScaleformMovieLoaded(scaleform)) { resolve(); clearInterval(interval) }}, 10)
+    })
+    }
+  public static async CreateInstructionScaleform(scf: string): Promise<number> {
+    return new Promise<number>((resolve, reject) => {
+      const scaleform = RequestScaleformMovie(scf)
+      Cameras.loadScaleForm(scaleform).then(() => {
+        PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
+        PopScaleformMovieFunctionVoid()
+        
+        PushScaleformMovieFunction(scaleform, "SET_CLEAR_SPACE")
+        PushScaleformMovieFunctionParameterInt(200)
+        PopScaleformMovieFunctionVoid()
+      
+        PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
+        PushScaleformMovieFunctionParameterInt(0)
+        this.InstructionButton(GetControlInstructionalButton(1, 38, 1))
+        this.InstructionButtonMessage("Next camera")
+        PopScaleformMovieFunctionVoid()
+      
+        PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
+        PushScaleformMovieFunctionParameterInt(1)
+        this.InstructionButton(GetControlInstructionalButton(1, 29, 1))
+        this.InstructionButtonMessage("Close Camera")
+        PopScaleformMovieFunctionVoid()
+      
+        PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
+        PushScaleformMovieFunctionParameterInt(2)
+        this.InstructionButton(GetControlInstructionalButton(1, 44, 1))
+        this.InstructionButtonMessage("Previous camera")
+        PopScaleformMovieFunctionVoid()
+      
+        PushScaleformMovieFunction(scaleform, "DRAW_INSTRUCTIONAL_BUTTONS")
+        PopScaleformMovieFunctionVoid()
+      
+        PushScaleformMovieFunction(scaleform, "SET_BACKGROUND_COLOUR")
+        PushScaleformMovieFunctionParameterInt(0)
+        PushScaleformMovieFunctionParameterInt(0)
+        PushScaleformMovieFunctionParameterInt(0)
+        PushScaleformMovieFunctionParameterInt(80)
+        PopScaleformMovieFunctionVoid()
+      
+        resolve(scaleform)
+      })
+    })
   }
   
  
