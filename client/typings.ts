@@ -1,7 +1,7 @@
 import * as Cfx from 'fivem-js';
 export type LoadoutWeapon = { name: string, ammoCount: number, addons: string[] }
-export type Loadout = { DEA: {[key: string]: LoadoutWeapon[] }, NARCO: {[key: string]: LoadoutWeapon[]} }
-export type Team = "DEA" | "NARCO"
+export type Loadout = { DEA: {[key: string]: LoadoutWeapon[] }, NARCO: {[key: string]: LoadoutWeapon[]}, NONE: undefined }
+export type Team = "DEA" | "NARCO" | "NONE"
 export type BlipSprite = number
 export type BlipColor = number
 export type BlipId = number

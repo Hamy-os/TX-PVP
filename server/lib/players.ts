@@ -1,6 +1,6 @@
 import { Teams, ServerId, Team } from "../typings";
-import { getPlayerIdentifier, Member, castVec3 } from "./";
-const players: Teams = { DEA: {}, NARCO: {} }
+import { getPlayerIdentifier, Member, castVec3, ServerCallback } from "./";
+const players: Teams = { DEA: {}, NARCO: {}, NONE: {} }
 const idMapped: { [key: string]: Team } = {}
 
 export function addPlayerToTeam(serverId: ServerId, team: Team) {
@@ -37,5 +37,8 @@ export function setUpEvents() {
     const src = source
     players[idMapped[src]][src].deleteClone()
   })
-  
+
+  ServerCallback.registerCallback<Team>("getPlayerTeam", (src: string) => {
+        return idMapped[src] || "NONE"
+  })
 } 

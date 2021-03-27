@@ -1,5 +1,5 @@
 export class ClientCallback {
-  private static funcs: { [key: string]: (...args: unknown[]) => Promise<unknown> } = {}
+  private static funcs: { [key: string]: (...args: unknown[]) => Promise<unknown> | unknown } = {}
   private static results: {[key: string]: unknown} = {}
   public static listen() {
     console.log("Listening for callbacks")
@@ -16,13 +16,14 @@ export class ClientCallback {
     })
   }
 
-  public static registerCallback<T>(name: string, fn: (...args: unknown[]) => Promise<T>): void {
+  public static registerCallback<T>(name: string, fn: (...args: unknown[]) => Promise<T> | T): void {
     this.funcs[name] = fn
   }
   
-  public static triggerServerCallback<T>(name: string, target: string, ...args: unknown[]): Promise<T> {
+  public static triggerServerCallback<T>(name: string,  ...args: unknown[]): Promise<T> {
     return new Promise<T>((resolve, reject) => {
-      emitNet(`TXPVP:CORE:sv_cb_trigger`, name, target, args)
+      emitNet(`TXPVP:CORE:sv_cb_trigger`, name, args)
+      console.log("Triggered callback")
       onNet(`TXPVP:CORE:sv_cb_receive:${name}`, (...result: unknown[]) => {
         resolve(result as unknown as T)
       })

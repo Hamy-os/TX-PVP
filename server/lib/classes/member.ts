@@ -1,7 +1,6 @@
 import { Vector3 } from "fivem-js";
 import { ServerId, Identifier, Player, Team } from "../../typings";
-import { getPlayerIdentifier, castVec3 } from "../";
-
+import { getPlayerIdentifier, castVec3, ServerCallback } from "../";
 
 export class Member {
   private player: Player

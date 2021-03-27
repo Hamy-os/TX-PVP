@@ -13,7 +13,8 @@ const loadOuts: Loadout = {
     "basic": [{ name: "weapon_bullpuprifle_mk2", ammoCount: 9999, addons: [] }, { name: "weapon_combatshotgun", ammoCount: 9999, addons: [] },
       { name: "weapon_pistol_mk2", ammoCount: 9999, addons: [] }, { name: "weapon_smg_mk2", ammoCount: 9999, addons: [] }, { name: "weapon_compactlauncher", ammoCount: 3, addons: [] },
       { name: "weapon_flashlight", ammoCount: 9999, addons: [] }, { name: "weapon_knife", ammoCount: 9999, addons: [] }, { name: "weapon_molotov", ammoCount: 3, addons: [] }]
-  }
+  },
+  NONE: undefined
 }
 
 export function giveLoadoutToPlayer(loadout: string, side: Team): void {

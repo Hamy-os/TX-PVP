@@ -1,5 +1,5 @@
 export class ServerCallback {
-  private static funcs: { [key: string]: (...args: unknown[]) => Promise<unknown> } = {}
+  private static funcs: { [key: string]: (src: string, ...args: unknown[]) => Promise<unknown> | unknown } = {}
   private static results: {[key: string]: unknown} = {}
   public static listen() {
     console.log("Listening for callbacks")
@@ -8,15 +8,15 @@ export class ServerCallback {
       const fn = this.funcs[name]
       let result
       if (fn.constructor.name === "AsyncFunction") {
-        result = await this.funcs[name](args)
+        result = await this.funcs[name](src, args)
       } else {
-        result = this.funcs[name](args)
+        result = this.funcs[name](src, args)
       }
-      emitNet(`TXPVPV:CORE:sv_receive:${name}`, src, result)
+      emitNet(`TXPVP:CORE:sv_cb_receive:${name}`, src, result)
     })
   }
 
-  public static registerCallback<T>(name: string, fn: (...args: unknown[]) => Promise<T>): void {
+  public static registerCallback<T>(name: string, fn: (src: string, ...args: unknown[]) => Promise<T> | T): void {
     this.funcs[name] = fn
   }
   

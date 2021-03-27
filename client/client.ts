@@ -1,18 +1,24 @@
 import * as Cfx from 'fivem-js';
 import { giveLoadoutToPlayer } from "./lib/loadouts";
-import {spawnLocations, setupMapEvents, setupLobbyEvents, Cameras} from "./lib"
+import {spawnLocations, setupMapEvents, setupLobbyEvents, Cameras, ClientCallback} from "./lib"
 import { Team } from "./typings";
 /**Init functions */
 
 setupLobbyEvents()
 setupMapEvents()
+ClientCallback.listen()
 Cameras.setUpCameraUtils()
+console.log("Setting up commands")
 RegisterCommand("join", async (source: string, args: string[]) => {
   emit("TXPVP:CORE:spawnPlayerOnLobby", (spawnLocations.get("lobbySpawn")))
   giveLoadoutToPlayer("basic", "NARCO")
 }, false);
 
 
+RegisterCommand("team", async (source: string, args: string[]) => {
+  const result = await ClientCallback.triggerServerCallback<Team>("getPlayerTeam")
+  console.log(result)
+}, true)
 
 RegisterCommand('car', async (source: number, args: string[]) => {
   const vehicle = await Cfx.World.createVehicle(new Cfx.Model(args[0]), Cfx.Game.PlayerPed.Position, Cfx.Game.PlayerPed.Heading);
