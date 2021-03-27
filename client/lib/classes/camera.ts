@@ -20,6 +20,7 @@ export class Cameras {
   private static isNightVisionOn = false
   private static angleY = 0.0
   private static angleZ = 0.0
+  private static coords: number[]
   
   public static setUpCameraUtils(): void {
     RegisterCommand("openCamera", () => {
@@ -57,6 +58,7 @@ export class Cameras {
     
   }
   public static async openCamera(index = 0): Promise<void> {
+    Cameras.coords = GetEntityCoords(PlayerPedId(), false)
     this.ChangeCamera(index)
     const instructions = await Cameras.CreateInstructionScaleform("instructional_buttons")
     Cameras.scaleformTick = setTick(() => { DrawScaleformMovieFullscreen(instructions, 255, 255, 255, 255, 0), Cameras.rotate()})
@@ -79,6 +81,10 @@ export class Cameras {
     SetNightvision(toggle)
   }
   public static CloseCamera(): void {
+    const ped = PlayerPedId()
+    SetEntityInvincible(ped, false)
+    SetEntityAlpha(ped, 255, 0)
+    SetEntityCoords(ped, Cameras.coords[0], Cameras.coords[1], Cameras.coords[2], false, false, false, false)
     DestroyCam(this.createdCamera, false)
     ClearTimecycleModifier();
     Cameras.ToggleNightVisison(false)
@@ -144,7 +150,11 @@ export class Cameras {
             location: camData.name
          }))
         this.createdCamera = cam
-        this.camIndex = index
+    this.camIndex = index
+    const ped = PlayerPedId()
+    SetEntityInvincible(ped, true)
+    SetEntityAlpha(ped, 0, 0)
+    SetEntityCoords(ped, cameraLocations[index].coords.x, cameraLocations[index].coords.y, cameraLocations[index].coords.z, false, false, false, false)
   }
   
   private static InstructionButton(ControlButton: string): void {

@@ -6,3 +6,4 @@ export * from "./lobby"
 export * from "./classes/blip"
 export * from "./classes/teleport"
 export * from "./classes/camera"
+export * from "./json";

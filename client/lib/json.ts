@@ -1,4 +1,4 @@
-export function getCams(): {orientation: number[], position: number[]}[] {
+export function getCams(): {orientation: number[], position: number[], name: string}[] {
   return JSON.parse(`[{
     "orientation": [
       0,
@@ -10,7 +10,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       4987.666,
       -5704.866,
       23.54324
-    ]
+    ],
+    "name": "House alley 1"
   },
   {
     "orientation": [
@@ -23,7 +24,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       4977.036,
       -5716.737,
       23.54324
-    ]
+    ],
+    "name": "House driveway 1"
   },
   {
     "orientation": [
@@ -36,7 +38,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       5069.208,
       -5780.774,
       18.98095
-    ]
+    ],
+    "name": "Pool 1"
   },
   {
     "orientation": [
@@ -49,7 +52,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       5007.522,
       -5730.472,
       17.93873
-    ]
+    ],
+    "name": "Vault entr. 1"
   },
   {
     "orientation": [
@@ -62,7 +66,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       5012.602,
       -5726.765,
       18.07703
-    ]
+    ],
+    "name": "Main yrd. 1"
   },
   {
     "orientation": [
@@ -75,7 +80,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       4994.601,
       -5711.071,
       23.54324
-    ]
+    ],
+    "name": "Main yrd. 2"
   },
   {
     "orientation": [
@@ -88,7 +94,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       4977.036,
       -5716.737,
       23.54324
-    ]
+    ],
+    "name": "Driveway 2"
   },
   {
     "orientation": [
@@ -101,7 +108,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       4987.666,
       -5704.866,
       23.54324
-    ]
+    ],
+    "name": "Driveway 3"
   },
   {
     "orientation": [
@@ -114,7 +122,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       4973.967,
       -5758.889,
       23.88884
-    ]
+    ],
+    "name": "Cages 1"
   },
   {
     "orientation": [
@@ -127,7 +136,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       4978.799,
       -5760.352,
       23.88884
-    ]
+    ],
+    "name": "Cages 2"
   },
   {
     "orientation": [
@@ -140,7 +150,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       4986.54,
       -5765.747,
       23.1268
-    ]
+    ],
+    "name": "Cages 3"
   },
   {
     "orientation": [
@@ -153,7 +164,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       4964.522,
       -5759.081,
       23.1268
-    ]
+    ],
+    "name": "Cages 4"
   },
   {
     "orientation": [
@@ -166,7 +178,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       4964.927,
       -5784.415,
       24.3679
-    ]
+    ],
+    "name": "Cages walkpath 1"
   },
   {
     "orientation": [
@@ -179,7 +192,9 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       4970.927,
       -5787.451,
       24.3679
-    ]
+    ],
+    "name": "Cages walkpath 2"
+
   },
   {
     "orientation": [
@@ -192,7 +207,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       4999.9,
       -5761.044,
       23.11659
-    ]
+    ],
+    "name": "House balcony 1"
   },
   {
     "orientation": [
@@ -205,7 +221,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       5012.471,
       -5760.333,
       22.07414
-    ]
+    ],
+    "name": "House balcony 2"
   },
   {
     "orientation": [
@@ -218,7 +235,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       5020.436,
       -5747.509,
       22.07414
-    ]
+    ],
+    "name": "House central 1"
   },
   {
     "orientation": [
@@ -231,7 +249,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       5016.578,
       -5748.041,
       26.587
-    ]
+    ],
+    "name": "House central 2"
   },
   {
     "orientation": [
@@ -244,7 +263,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       5007.925,
       -5746.825,
       30.83748
-    ]
+    ],
+    "name": "House central 3"
   },
   {
     "orientation": [
@@ -257,7 +277,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       5004.729,
       -5758.724,
       20.7513
-    ]
+    ],
+    "name": "House central 4"
   },
   {
     "orientation": [
@@ -270,7 +291,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       5001.683,
       -5751.18,
       22.20946
-    ]
+    ],
+    "name": "Lower balcony 1"
   },
   {
     "orientation": [
@@ -283,7 +305,8 @@ export function getCams(): {orientation: number[], position: number[]}[] {
       5008.536,
       -5740.145,
       22.20946
-    ]
+    ],
+    "name": "Lower balcony 2"
   }
 ]`)
 }

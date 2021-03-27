@@ -1,7 +1,7 @@
 import { Vector3 } from "fivem-js"
 const spwn = new Map<string, Vector3>()
-
-
+import { castVec3 } from "./";
+import { getCams } from "./json";
 spwn.set("airField", new Vector3(4504.017578125, -4534.1342773438, 4.1950516700745))
 spwn.set("lobbySpawn", new Vector3(121.1, -728.64, 242.15))
 spwn.set("smallPort", new Vector3(4984.4990234375, -5163.41015625, 2.5144073963165))
@@ -14,6 +14,12 @@ spwn.set("dinghyTest", new Vector3(5103.961, -5115.153, 0.3953705))
 const cams: { coords: Vector3, rot: number, name: string }[] = [{ coords: new Vector3(4515.3837890625, -4529.1918945312, 7.1206555366516), rot: 19.186916351318, name: "Air field" },
   { coords: new Vector3(5522.0302734375, -5279.3881835938, 11.896118164062), rot: 10.0, name: "Random road" },
   { coords: new Vector3(5267.435546875, -5425.7543945312, 161.04574584961), rot: -20.520044326782, name: "Relay twr" }]
+
+
+getCams().forEach((v: {orientation: number[], position: number[], name: string}, index: number) => {
+  const res = { coords: castVec3(v.position), rot: v.orientation[3], name: v.name || "Camera " + index}
+  cams.push(res)
+  })
 
 export const spawnLocations = spwn
 export const cameraLocations = cams
