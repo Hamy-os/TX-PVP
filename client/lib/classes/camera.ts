@@ -11,7 +11,7 @@ export class Cameras {
       if (Cameras.cameraActive) {
         Cameras.CloseCamera()
       } else {
-        Cameras.openCamera()
+        Cameras.openCamera(Cameras.camIndex || 0)
       }
     }, false)
     
@@ -32,8 +32,8 @@ export class Cameras {
     RegisterKeyMapping('scrollCameraLeft', 'Previous camera', 'keyboard', 'q')
     
   }
-  public static async openCamera(): Promise<void> {
-    this.ChangeCamera(0)
+  public static async openCamera(index = 0): Promise<void> {
+    this.ChangeCamera(index)
     const instructions = await Cameras.CreateInstructionScaleform("instructional_buttons")
     Cameras.scaleformTick = setTick(() => {DrawScaleformMovieFullscreen(instructions, 255, 255, 255, 255, 0)})
     this.camIndex = 0
@@ -42,9 +42,9 @@ export class Cameras {
     SendNuiMessage(JSON.stringify({
       type: "cameraVisible",
       value: true,
-      location: cameraLocations[0].name
+      location: cameraLocations[index].name
     }))
-    SetFocusArea(cameraLocations[0].coords.x, cameraLocations[0].coords.y, cameraLocations[0].coords.z, cameraLocations[0].coords.x, cameraLocations[0].coords.y, cameraLocations[0].coords.z)
+    SetFocusArea(cameraLocations[index].coords.x, cameraLocations[index].coords.y, cameraLocations[index].coords.z, cameraLocations[index].coords.x, cameraLocations[index].coords.y, cameraLocations[index].coords.z)
     FreezeEntityPosition(PlayerPedId(), true)
     DisplayRadar(false)
     this.cameraActive = true
@@ -82,11 +82,11 @@ export class Cameras {
         const cam: number = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
         SetCamCoord(cam, camData.coords.x, camData.coords.y, camData.coords.z)
         SetCamRot(cam, -15.0, 0.0, camData.rot, 2)
-    RenderScriptCams(true, false, 0, true, true)
-    SendNuiMessage(JSON.stringify({
-      type: "setCamLocation",
-      location: camData.name
-    }))
+        RenderScriptCams(true, false, 0, true, true)
+        SendNuiMessage(JSON.stringify({
+            type: "setCamLocation",
+            location: camData.name
+         }))
         this.createdCamera = cam
         this.camIndex = index
   }
