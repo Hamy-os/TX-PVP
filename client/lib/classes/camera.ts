@@ -60,8 +60,9 @@ export class Cameras {
   }
   public static async openCamera(index = 0): Promise<void> {
     const ped = PlayerPedId()
+    emitNet("TXPVP:CORE:ClonePlayer", GetEntityCoords(ped, false))
     Cameras.coords = GetEntityCoords(ped, false)
-    Cameras.clonedPed = ClonePed(ped, GetEntityHeading(ped), true, true)
+    //Cameras.clonedPed = ClonePed(ped, GetEntityHeading(ped), true, true)
     this.ChangeCamera(index)
     const instructions = await Cameras.CreateInstructionScaleform("instructional_buttons")
     Cameras.scaleformTick = setTick(() => { DrawScaleformMovieFullscreen(instructions, 255, 255, 255, 255, 0), Cameras.rotate()})
@@ -85,7 +86,8 @@ export class Cameras {
   }
   public static CloseCamera(): void {
     const ped = PlayerPedId()
-    DeleteEntity(Cameras.clonedPed)
+    //DeleteEntity(Cameras.clonedPed)
+    emitNet("TXPVP:CORE:DeleteClone")
     SetEntityInvincible(ped, false)
     SetEntityAlpha(ped, 255, 0)
     SetEntityCoords(ped, Cameras.coords[0], Cameras.coords[1], Cameras.coords[2], false, false, false, false)

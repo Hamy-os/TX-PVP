@@ -5,8 +5,9 @@ import { getPlayerIdentifier, castVec3 } from "../";
 
 export class Member {
   private player: Player
+  private cloneId: number
   public constructor(serverId: ServerId, team: Team) {
-    this.player = {serverId: serverId, name: GetPlayerName(serverId), identifier: getPlayerIdentifier(serverId) as Identifier, team}
+    this.player = { serverId: serverId, name: GetPlayerName(serverId), identifier: getPlayerIdentifier(serverId) as Identifier, team }
   }
     // TODO! testing
   public get coords(): Vector3 {
@@ -25,5 +26,14 @@ export class Member {
   public trigger(eventName: string, ...args: unknown[]): void {
     emitNet(eventName, this.player.serverId, args)
   }
-
+  public createClone(crds: Vector3): number {
+    const ped = GetPlayerPed(this.player.serverId)
+    const coords = crds || castVec3(GetEntityCoords(ped))
+    const heading = GetEntityHeading(ped)
+    this.cloneId = CreatePed(4, GetEntityModel(ped), coords.x, coords.y, coords.z, heading, true, true)
+    return this.cloneId
+  }
+  public deleteClone(): void {
+    DeleteEntity(this.cloneId)
+  }
 }
