@@ -91,12 +91,12 @@ export class Cameras {
         this.camIndex = index
   }
   
-  public static InstructionButton(ControlButton: string): void {
+  private static InstructionButton(ControlButton: string): void {
     N_0xe83a3e3557a56640(ControlButton)
   }
   
   
-  public static InstructionButtonMessage(text: string): void {
+  private static InstructionButtonMessage(text: string): void {
     BeginTextCommandScaleformString("STRING")
     AddTextComponentScaleform(text)
     EndTextCommandScaleformString()
@@ -107,7 +107,7 @@ export class Cameras {
       const interval = setInterval(() => { if (HasScaleformMovieLoaded(scaleform)) { resolve(); clearInterval(interval) }}, 10)
     })
     }
-  public static async CreateInstructionScaleform(scf: string): Promise<number> {
+  private static async CreateInstructionScaleform(scf: string): Promise<number> {
     return new Promise<number>((resolve, reject) => {
       const scaleform = RequestScaleformMovie(scf)
       Cameras.loadScaleForm(scaleform).then(() => {
@@ -127,7 +127,7 @@ export class Cameras {
         PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
         PushScaleformMovieFunctionParameterInt(1)
         this.InstructionButton(GetControlInstructionalButton(1, 29, 1))
-        this.InstructionButtonMessage("Close Camera")
+        this.InstructionButtonMessage("Close camera")
         PopScaleformMovieFunctionVoid()
       
         PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
