@@ -1,12 +1,12 @@
 import * as Cfx from 'fivem-js';
 import { giveLoadoutToPlayer } from "./lib/loadouts";
-import {spawnLocations, setupMapEvents, setupLobbyEvents, setUpCameraUtils} from "./lib"
+import {spawnLocations, setupMapEvents, setupLobbyEvents, Cameras} from "./lib"
 import { Team } from "./typings";
 /**Init functions */
 
 setupLobbyEvents()
 setupMapEvents()
-setUpCameraUtils()
+Cameras.setUpCameraUtils()
 RegisterCommand("join", async (source: string, args: string[]) => {
   emit("TXPVP:CORE:spawnPlayerOnLobby", (spawnLocations.get("lobbySpawn")))
   giveLoadoutToPlayer("basic", "NARCO")
