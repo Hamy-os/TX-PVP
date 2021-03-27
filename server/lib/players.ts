@@ -1,4 +1,3 @@
-import { couldStartTrivia } from "typescript";
 import { Teams, ServerId, Team } from "../typings";
 import { getPlayerIdentifier, Member, castVec3 } from "./";
 const players: Teams = { DEA: {}, NARCO: {} }
