@@ -1,6 +1,7 @@
 import * as Cfx from 'fivem-js';
 import { Vector3 } from 'fivem-js';
-import { cameraLocations, castVec3, casMatrix} from "../";
+import { cameraLocations, castVec3, casMatrix } from "../";
+import { Blip } from "./blip";
 export const Keys = {
 	["ESC"] : 322, ["F1"] : 288, ["F2"] : 289, ["F3"] : 170, ["F5"] : 166, ["F6"] : 167, ["F7"] : 168, ["F8"] : 169, ["F9"] : 56, ["F10"] : 57,
 	["~"] : 243, ["1"] : 157, ["2"] : 158, ["3"] : 160, ["4"] : 164, ["5"] : 165, ["6"] : 159, ["7"] : 161, ["8"] : 162, ["9"] : 163, ["-"] : 84, [":"] : 83, ["BACKSPACE"] : 177,
@@ -55,7 +56,7 @@ export class Cameras {
     RegisterKeyMapping('scrollCameraRight', 'Next camera', 'keyboard', 'e')
     RegisterKeyMapping('scrollCameraLeft', 'Previous camera', 'keyboard', 'q')
     RegisterKeyMapping('cameraNightVision', 'Toggle camera night visison', 'keyboard', 'n')
-
+    Cameras.showBlips()
     
   }
   public static async openCamera(index = 0): Promise<void> {
@@ -108,7 +109,16 @@ export class Cameras {
       value: false
     }))
   }
-  
+  public static showBlips(): void {
+    cameraLocations.forEach((data: { coords: Vector3, rot: number, name: string }, idx: number) => {
+      new Blip(data.coords, 604, 34, idx.toString(), 10, `CCTV (${data.name})`, (blipId: number) => {
+        SetBlipRotation(blipId, 90)
+        SetBlipCategory(blipId, 1)
+        SetBlipAsFriendly(blipId, true)
+        SetBlipColour(blipId, 2)
+    })
+    })
+  }
   public static rotate(): void {
     const getCameraRot = castVec3(GetCamRot(Cameras.createdCamera, 2))
     HideHudComponentThisFrame(7)

@@ -41,12 +41,4 @@ getCams().forEach((v: {orientation: number[], position: number[], name: string},
 export const spawnLocations = spwn
 export const cameraLocations = cams
 
-cameraLocations.forEach((data: { coords: Vector3, rot: number, name: string }, idx: number) => {
-  new Blip(data.coords, 604, 34, idx.toString(), 10, `CCTV (${data.name})`, (blipId: number) => {
-    SetBlipRotation(blipId, 90)
-    SetBlipCategory(blipId, 1)
-    SetBlipAsFriendly(blipId, true)
-    SetBlipColour(blipId, 3)
-})
-})
 // CAMERA HACKER COORDS vector4(5266.0629882812, -5427.4956054688, 141.04861450195, 323.33377075195)
