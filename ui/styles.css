@@ -1,0 +1,42 @@
+.cameraOverlay {
+    font-family: arial;
+    color: ivory;
+    font-weight: bold;
+    position: relative;
+}
+
+.location {
+    float: left;
+    border: 2px solid black;
+    padding: 10px;
+    background-color: black;
+    width: fit-content;
+}
+
+.recTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    padding: 10px;
+    background-color: black;
+    width: fit-content;
+}
+
+.redDot {
+    margin-right: 5px;
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.cctvTitle {
+    float: left;
+    border: 2px solid black;
+    padding: 10px;
+    background-color: black;
+    width: fit-content;
+    margin-right: 10px;
+}

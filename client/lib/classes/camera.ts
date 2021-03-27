@@ -34,6 +34,8 @@ export class Cameras {
   public static openCamera(): void {
     this.ChangeCamera(0)
     this.camIndex = 0
+    SetTimecycleModifier("scanline_cam_cheap")
+    SetTimecycleModifierStrength(2.0)
     SetFocusArea(cameraLocations[0].coords.x, cameraLocations[0].coords.y, cameraLocations[0].coords.z, cameraLocations[0].coords.x, cameraLocations[0].coords.y, cameraLocations[0].coords.z)
     FreezeEntityPosition(PlayerPedId(), true)
     DisplayRadar(false)
@@ -43,9 +45,9 @@ export class Cameras {
   
   public static CloseCamera(): void {
     DestroyCam(this.createdCamera, false)
+    ClearTimecycleModifier();
     RenderScriptCams(false, false, 1, true, true)
     this.createdCamera = 0
-    ClearTimecycleModifier()
     SetFocusEntity(PlayerPedId())
     FreezeEntityPosition(PlayerPedId(), false)
     DisplayRadar(true)
