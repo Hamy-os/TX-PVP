@@ -7,11 +7,11 @@ export class Cameras {
   public static camIndex: number
   public static setUpCameraUtils(): void {
     RegisterCommand("openCamera", () => {
-      Cameras.openCamera()
-    }, false)
-    
-    RegisterCommand("closeCamera", () => {
-      Cameras.CloseCamera()
+      if (Cameras.cameraActive) {
+        Cameras.CloseCamera()
+      } else {
+        Cameras.openCamera()
+      }
     }, false)
     
     RegisterCommand("scrollCameraRight", () => {
@@ -27,7 +27,6 @@ export class Cameras {
     }, false)
     
     RegisterKeyMapping('openCamera', 'Open your camera', 'keyboard', 'b')
-    RegisterKeyMapping('closeCamera', 'Close your camera', 'keyboard', 'n')
     RegisterKeyMapping('scrollCameraRight', 'Next camera', 'keyboard', 'e')
     RegisterKeyMapping('scrollCameraLeft', 'Previous camera', 'keyboard', 'q')
     
