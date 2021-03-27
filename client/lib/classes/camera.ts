@@ -16,14 +16,12 @@ export class Cameras {
     
     RegisterCommand("scrollCameraRight", () => {
       if (Cameras.cameraActive) {
-        console.log("Switching to next camera")
         Cameras.ChangeCamera(Cameras.camIndex + 1)
       }
     }, false)
     
     RegisterCommand("scrollCameraLeft", () => {
       if (Cameras.cameraActive) {
-        console.log("Switching to previous camera")
         Cameras.ChangeCamera(Cameras.camIndex - 1)
       }
     }, false)
@@ -35,7 +33,6 @@ export class Cameras {
     
   }
   public static openCamera(): void {
-    console.log("Opening camera")
     this.ChangeCamera(0)
     this.camIndex = 0
     SetFocusArea(cameraLocations[0].coords.x, cameraLocations[0].coords.y, cameraLocations[0].coords.z, cameraLocations[0].coords.x, cameraLocations[0].coords.y, cameraLocations[0].coords.z)
@@ -46,7 +43,6 @@ export class Cameras {
   }
   
   public static CloseCamera(): void {
-    console.log("Closing camera, curr cam id: ", this.createdCamera)
     DestroyCam(this.createdCamera, false)
     RenderScriptCams(false, false, 1, true, true)
     this.createdCamera = 0
@@ -59,28 +55,22 @@ export class Cameras {
   
   
   public static ChangeCamera(index: number): void {
-    console.log("Switching to camera index: ", index)
     if (!cameraLocations[index]) {
-      console.log("Resetting index to 0")
       index = 0
     } else if (index == -1) {
       index = cameraLocations.length - 1
     }
     if (this.createdCamera != 0) {
-      console.log("Destroying cam")
       DestroyCam(this.createdCamera, false)
       this.createdCamera = 0
     }
         const camData = cameraLocations[index]
         const cam: number = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
-        console.log("Created new camera")
         SetCamCoord(cam, camData.coords.x, camData.coords.y, camData.coords.z)
         SetCamRot(cam, -15.0, 0.0, camData.rot, 2)
         RenderScriptCams(true, false, 0, true, true)
         this.createdCamera = cam
         this.camIndex = index
-    console.log("Switched to camera index: ", this.camIndex)
-
   }
   
   public static InstructionButton(ControlButton: string): void {
