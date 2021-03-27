@@ -12,9 +12,9 @@ spwn.set("partyPlace", new Vector3(4900.06640625, -4917.12109375, 3.377392530441
 spwn.set("northYankton", new Vector3(3217.697, 	-4834.826, 111.8152))
 spwn.set("dinghyTest", new Vector3(5103.961, -5115.153, 0.3953705))
 
-const cams: { coords: Vector3, rot: number }[] = [{ coords: new Vector3(4504.017578125, -4534.1342773438, 4.1950516700745), rot: 10.0 },
-  { coords: new Vector3(5522.0302734375, -5279.3881835938, 11.896118164062), rot: 10.0 },
-  { coords: new Vector3(5267.435546875, -5425.7543945312, 161.04574584961), rot: -20.520044326782 }]
+const cams: { coords: Vector3, rot: number, name: string }[] = [{ coords: new Vector3(4504.017578125, -4534.1342773438, 4.1950516700745), rot: 10.0, name: "Air field" },
+  { coords: new Vector3(5522.0302734375, -5279.3881835938, 11.896118164062), rot: 10.0, name: "Random road" },
+  { coords: new Vector3(5267.435546875, -5425.7543945312, 161.04574584961), rot: -20.520044326782, name: "Relay twr" }]
 
 export const spawnLocations = spwn
 export const cameraLocations = cams

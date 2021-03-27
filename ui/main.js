@@ -4,16 +4,18 @@ $(() => {
     // listen for nui messages
     window.addEventListener('message', (event) => {
         if (event.data.type === 'cameraVisible') {
-            if (isCamOpen) {
+            if (!event.data.value) {
                 $(".cameraOverlay").hide()
                 isCamOpen = false
             } else {
                 $(".cameraOverlay").show()
                 isCamOpen = true
+                $(".location").text(event.data.location)
             }
         }
         if (event.data.type === "setCamLocation") {
-            //TODO! set cam locations
+            $(".location").text(event.data.location)
         }
     });
+    // cunt
 })

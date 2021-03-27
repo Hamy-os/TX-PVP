@@ -36,6 +36,11 @@ export class Cameras {
     this.camIndex = 0
     SetTimecycleModifier("scanline_cam_cheap")
     SetTimecycleModifierStrength(2.0)
+    SendNuiMessage(JSON.stringify({
+      type: "cameraVisible",
+      value: true,
+      location: cameraLocations[0].name
+    }))
     SetFocusArea(cameraLocations[0].coords.x, cameraLocations[0].coords.y, cameraLocations[0].coords.z, cameraLocations[0].coords.x, cameraLocations[0].coords.y, cameraLocations[0].coords.z)
     FreezeEntityPosition(PlayerPedId(), true)
     DisplayRadar(false)
@@ -52,6 +57,10 @@ export class Cameras {
     FreezeEntityPosition(PlayerPedId(), false)
     DisplayRadar(true)
     this.cameraActive = false
+    SendNuiMessage(JSON.stringify({
+      type: "cameraVisible",
+      value: false
+    }))
   }
   
   
@@ -69,7 +78,11 @@ export class Cameras {
         const cam: number = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
         SetCamCoord(cam, camData.coords.x, camData.coords.y, camData.coords.z)
         SetCamRot(cam, -15.0, 0.0, camData.rot, 2)
-        RenderScriptCams(true, false, 0, true, true)
+    RenderScriptCams(true, false, 0, true, true)
+    SendNuiMessage(JSON.stringify({
+      type: "setCamLocation",
+      location: camData.name
+    }))
         this.createdCamera = cam
         this.camIndex = index
   }
