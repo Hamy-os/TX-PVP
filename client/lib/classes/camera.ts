@@ -33,6 +33,8 @@ export class Cameras {
   }
   public static openCamera(): void {
     this.ChangeCamera(0)
+    const instructions = Cameras.CreateInstuctionScaleform("instructional_buttons")
+    DrawScaleformMovieFullscreen(instructions, 255, 255, 255, 255, 0)
     this.camIndex = 0
     SetTimecycleModifier("scanline_cam_cheap")
     SetTimecycleModifierStrength(2.0)
@@ -101,9 +103,7 @@ export class Cameras {
   
   public static CreateInstuctionScaleform(scf: string): number {
     const scaleform = RequestScaleformMovie(scf)
-    while (!HasScaleformMovieLoaded(scaleform)) {
-      Wait(10)
-    }
+    const loading = setInterval(() => {if (HasScaleformMovieLoaded(scaleform)) {clearInterval(loading)}}, 10)
     PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
     PopScaleformMovieFunctionVoid()
     
