@@ -8,7 +8,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       4987.666,
-      -5704.866,
+      -5703.866,
       23.54324
     ],
     "name": "House alley 1"
@@ -22,7 +22,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       4977.036,
-      -5716.737,
+      -5715.737,
       23.54324
     ],
     "name": "House driveway 1"
@@ -36,7 +36,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       5069.208,
-      -5780.774,
+      -5781.774,
       18.98095
     ],
     "name": "Pool 1"
@@ -50,7 +50,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       5007.522,
-      -5730.472,
+      -5731.472,
       17.93873
     ],
     "name": "Vault entr. 1"
@@ -64,7 +64,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       5012.602,
-      -5726.765,
+      -5727.765,
       18.07703
     ],
     "name": "Main yrd. 1"
@@ -78,7 +78,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       4994.601,
-      -5711.071,
+      -5712.071,
       23.54324
     ],
     "name": "Main yrd. 2"
@@ -92,7 +92,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       4977.036,
-      -5716.737,
+      -5717.737,
       23.54324
     ],
     "name": "Driveway 2"
@@ -120,7 +120,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       4973.967,
-      -5758.889,
+      -5759.889,
       23.88884
     ],
     "name": "Cages 1"
@@ -134,7 +134,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       4978.799,
-      -5760.352,
+      -5761.352,
       23.88884
     ],
     "name": "Cages 2"
@@ -148,7 +148,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       4986.54,
-      -5765.747,
+      -5766.747,
       23.1268
     ],
     "name": "Cages 3"
@@ -162,7 +162,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       4964.522,
-      -5759.081,
+      -5760.081,
       23.1268
     ],
     "name": "Cages 4"
@@ -176,7 +176,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       4964.927,
-      -5784.415,
+      -5783.415,
       24.3679
     ],
     "name": "Cages walkpath 1"
@@ -190,7 +190,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       4970.927,
-      -5787.451,
+      -5788.451,
       24.3679
     ],
     "name": "Cages walkpath 2"
@@ -205,7 +205,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       4999.9,
-      -5761.044,
+      -5762.044,
       23.11659
     ],
     "name": "House balcony 1"
@@ -219,7 +219,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       5012.471,
-      -5760.333,
+      -5761.333,
       22.07414
     ],
     "name": "House balcony 2"
@@ -233,7 +233,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       5020.436,
-      -5747.509,
+      -5748.509,
       22.07414
     ],
     "name": "House central 1"
@@ -247,7 +247,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       5016.578,
-      -5748.041,
+      -5749.041,
       26.587
     ],
     "name": "House central 2"
@@ -261,7 +261,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       5007.925,
-      -5746.825,
+      -5747.825,
       30.83748
     ],
     "name": "House central 3"
@@ -275,7 +275,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       5004.729,
-      -5758.724,
+      -5757.724,
       20.7513
     ],
     "name": "House central 4"
@@ -289,7 +289,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       5001.683,
-      -5751.18,
+      -5750.18,
       22.20946
     ],
     "name": "Lower balcony 1"
@@ -303,7 +303,7 @@ export function getCams(): {orientation: number[], position: number[], name: str
     ],
     "position": [
       5008.536,
-      -5740.145,
+      -5741.145,
       22.20946
     ],
     "name": "Lower balcony 2"
