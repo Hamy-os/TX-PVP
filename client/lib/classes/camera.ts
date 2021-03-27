@@ -5,6 +5,7 @@ export class Cameras {
   public static cameraActive: boolean 
   public static createdCamera: number
   public static camIndex: number
+  private static scaleformTick: number
   public static setUpCameraUtils(): void {
     RegisterCommand("openCamera", () => {
       if (Cameras.cameraActive) {
@@ -33,8 +34,8 @@ export class Cameras {
   }
   public static openCamera(): void {
     this.ChangeCamera(0)
-    const instructions = Cameras.CreateInstuctionScaleform("instructional_buttons")
-    DrawScaleformMovieFullscreen(instructions, 255, 255, 255, 255, 0)
+    const instructions = Cameras.CreateInstructionScaleform("instructional_buttons")
+    Cameras.scaleformTick = setTick(() => {DrawScaleformMovieFullscreen(instructions, 255, 255, 255, 255, 0)})
     this.camIndex = 0
     SetTimecycleModifier("scanline_cam_cheap")
     SetTimecycleModifierStrength(2.0)
@@ -58,6 +59,7 @@ export class Cameras {
     SetFocusEntity(PlayerPedId())
     FreezeEntityPosition(PlayerPedId(), false)
     DisplayRadar(true)
+    clearTick(Cameras.scaleformTick)
     this.cameraActive = false
     SendNuiMessage(JSON.stringify({
       type: "cameraVisible",
@@ -101,7 +103,7 @@ export class Cameras {
   }
     
   
-  public static CreateInstuctionScaleform(scf: string): number {
+  public static CreateInstructionScaleform(scf: string): number {
     const scaleform = RequestScaleformMovie(scf)
     const loading = setInterval(() => {if (HasScaleformMovieLoaded(scaleform)) {clearInterval(loading)}}, 10)
     PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
