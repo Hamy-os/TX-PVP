@@ -6,6 +6,7 @@ export class Cameras {
   public static createdCamera: number
   public static camIndex: number
   private static scaleformTick: number
+  private static isNightVisionOn = false
   public static setUpCameraUtils(): void {
     RegisterCommand("openCamera", () => {
       if (Cameras.cameraActive) {
@@ -26,10 +27,16 @@ export class Cameras {
         Cameras.ChangeCamera(Cameras.camIndex - 1)
       }
     }, false)
+    RegisterCommand("cameraNightVision", () => {
+      if (Cameras.cameraActive) {
+        Cameras.ToggleNightVisison(!Cameras.isNightVisionOn)
+      }
+    }, false)
     
     RegisterKeyMapping('openCamera', 'Open your camera', 'keyboard', 'b')
     RegisterKeyMapping('scrollCameraRight', 'Next camera', 'keyboard', 'e')
     RegisterKeyMapping('scrollCameraLeft', 'Previous camera', 'keyboard', 'q')
+    RegisterKeyMapping('cameraNightVision', 'Toggle camera night visison', 'keyboard', 'n')
     
   }
   public static async openCamera(index = 0): Promise<void> {
@@ -50,10 +57,14 @@ export class Cameras {
     this.cameraActive = true
     
   }
-  
+  public static ToggleNightVisison(toggle: boolean): void {
+    Cameras.isNightVisionOn = toggle
+    SetNightvision(toggle)
+  }
   public static CloseCamera(): void {
     DestroyCam(this.createdCamera, false)
     ClearTimecycleModifier();
+    Cameras.ToggleNightVisison(false)
     RenderScriptCams(false, false, 1, true, true)
     this.createdCamera = 0
     SetFocusEntity(PlayerPedId())
@@ -123,18 +134,26 @@ export class Cameras {
         this.InstructionButton(GetControlInstructionalButton(1, 38, 1))
         this.InstructionButtonMessage("Next camera")
         PopScaleformMovieFunctionVoid()
-      
+
         PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
         PushScaleformMovieFunctionParameterInt(1)
-        this.InstructionButton(GetControlInstructionalButton(1, 29, 1))
-        this.InstructionButtonMessage("Close camera")
-        PopScaleformMovieFunctionVoid()
-      
-        PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
-        PushScaleformMovieFunctionParameterInt(2)
         this.InstructionButton(GetControlInstructionalButton(1, 44, 1))
         this.InstructionButtonMessage("Previous camera")
         PopScaleformMovieFunctionVoid()
+
+        PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
+        PushScaleformMovieFunctionParameterInt(2)
+        this.InstructionButton(GetControlInstructionalButton(1, 29, 1))
+        this.InstructionButtonMessage("Close camera")
+        PopScaleformMovieFunctionVoid()
+
+        PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
+        PushScaleformMovieFunctionParameterInt(3)
+        this.InstructionButton(GetControlInstructionalButton(1, 249, 1))
+        this.InstructionButtonMessage("Toggle night vision")
+        PopScaleformMovieFunctionVoid()
+      
+      
       
         PushScaleformMovieFunction(scaleform, "DRAW_INSTRUCTIONAL_BUTTONS")
         PopScaleformMovieFunctionVoid()
