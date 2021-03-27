@@ -1,5 +1,5 @@
 import * as Cfx from 'fivem-js';
-import { cameraLocations } from "./";
+import { cameraLocations } from "../";
 
 export class Cameras {
   public static cameraActive: boolean 
@@ -16,12 +16,14 @@ export class Cameras {
     
     RegisterCommand("scrollCameraRight", () => {
       if (Cameras.cameraActive) {
+        console.log("Switching to next camera")
         Cameras.ChangeCamera(Cameras.camIndex++)
       }
     }, false)
     
     RegisterCommand("scrollCameraLeft", () => {
       if (Cameras.cameraActive) {
+        console.log("Switching to previous camera")
         Cameras.ChangeCamera(Cameras.camIndex--)
       }
     }, false)
@@ -63,15 +65,16 @@ export class Cameras {
       index = cameraLocations.length - 1
     }
     if (this.createdCamera != 0) {
+      console.log("Destroying cam")
       DestroyCam(this.createdCamera, false)
       this.createdCamera = 0
     }
         const camData = cameraLocations[index]
         const cam: number = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
+        console.log("Created new camera")
         SetCamCoord(cam, camData.coords.x, camData.coords.y, camData.coords.z)
         SetCamRot(cam, -15.0, 0.0, camData.rot, 2)
         RenderScriptCams(true, false, 0, true, true)
-        Wait(250)
         this.createdCamera = cam
         this.camIndex = index
   }
