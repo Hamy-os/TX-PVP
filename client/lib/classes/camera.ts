@@ -17,14 +17,14 @@ export class Cameras {
     RegisterCommand("scrollCameraRight", () => {
       if (Cameras.cameraActive) {
         console.log("Switching to next camera")
-        Cameras.ChangeCamera(Cameras.camIndex++)
+        Cameras.ChangeCamera(Cameras.camIndex + 1)
       }
     }, false)
     
     RegisterCommand("scrollCameraLeft", () => {
       if (Cameras.cameraActive) {
         console.log("Switching to previous camera")
-        Cameras.ChangeCamera(Cameras.camIndex--)
+        Cameras.ChangeCamera(Cameras.camIndex - 1)
       }
     }, false)
     
@@ -59,9 +59,11 @@ export class Cameras {
   
   
   public static ChangeCamera(index: number): void {
+    console.log("Switching to camera index: ", index)
     if (!cameraLocations[index]) {
+      console.log("Resetting index to 0")
       index = 0
-    } else if (index == 0) {
+    } else if (index == -1) {
       index = cameraLocations.length - 1
     }
     if (this.createdCamera != 0) {
@@ -77,6 +79,8 @@ export class Cameras {
         RenderScriptCams(true, false, 0, true, true)
         this.createdCamera = cam
         this.camIndex = index
+    console.log("Switched to camera index: ", this.camIndex)
+
   }
   
   public static InstructionButton(ControlButton: string): void {
@@ -84,7 +88,7 @@ export class Cameras {
   }
   
   
-  public static InstructionButtonMessage(text: string) {
+  public static InstructionButtonMessage(text: string): void {
     BeginTextCommandScaleformString("STRING")
     AddTextComponentScaleform(text)
     EndTextCommandScaleformString()
