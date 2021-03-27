@@ -80,10 +80,11 @@ export class Cameras {
   
   
   public static ChangeCamera(index: number): void {
-    if (!cameraLocations[index]) {
-      index = 0
-    } else if (index == -1) {
+    console.log("Switching to camera: ", index)
+    if (index == -1) {
       index = cameraLocations.length - 1
+    } else if (!cameraLocations[index]) {
+      index = 0
     }
     if (this.createdCamera != 0) {
       DestroyCam(this.createdCamera, false)
