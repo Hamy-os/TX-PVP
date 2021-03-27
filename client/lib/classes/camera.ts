@@ -66,13 +66,14 @@ export class Cameras {
     this.ChangeCamera(index)
     const instructions = await Cameras.CreateInstructionScaleform("instructional_buttons")
     Cameras.scaleformTick = setTick(() => { DrawScaleformMovieFullscreen(instructions, 255, 255, 255, 255, 0), Cameras.rotate()})
-    this.camIndex = 0
     SetTimecycleModifier("scanline_cam_cheap")
     SetTimecycleModifierStrength(2.0)
     SendNuiMessage(JSON.stringify({
       type: "cameraVisible",
       value: true,
-      location: cameraLocations[index].name
+      location: cameraLocations[index].name,
+      count: cameraLocations.length,
+      index: index
     }))
     SetFocusArea(cameraLocations[index].coords.x, cameraLocations[index].coords.y, cameraLocations[index].coords.z, cameraLocations[index].coords.x, cameraLocations[index].coords.y, cameraLocations[index].coords.z)
     FreezeEntityPosition(PlayerPedId(), true)
@@ -154,7 +155,8 @@ export class Cameras {
         RenderScriptCams(true, false, 0, true, true)
         SendNuiMessage(JSON.stringify({
             type: "setCamLocation",
-            location: camData.name
+          location: camData.name,
+            index
          }))
         this.createdCamera = cam
     this.camIndex = index

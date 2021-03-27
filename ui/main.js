@@ -1,20 +1,21 @@
 $(() => {
     let isCamOpen = false
-
-    // listen for nui messages
+    let cameraCount = 0
+        // listen for nui messages
     window.addEventListener('message', (event) => {
         if (event.data.type === 'cameraVisible') {
             if (!event.data.value) {
                 $(".cameraOverlay").hide()
                 isCamOpen = false
             } else {
-                $(".cameraOverlay").show()
                 isCamOpen = true
-                $(".location").text(event.data.location)
+                cameraCount = event.data.count
+                $(".location").text(`${event.data.location} (${event.data.index}/${cameraCount})`)
+                $(".cameraOverlay").show()
             }
         }
         if (event.data.type === "setCamLocation") {
-            $(".location").text(event.data.location)
+            $(".location").text(`${event.data.location} (${event.data.index}/${cameraCount})`)
         }
     });
     // cunt
