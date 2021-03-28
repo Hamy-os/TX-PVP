@@ -34,10 +34,11 @@ export function castPedPedComponent(body: RawOutfitDict): PedComponents[] {
     const result: PedComponents[] = []
     body.components[0].forEach((id: number, idx: number) => {
         let thisComp: PedComponents
-        thisComp.compId = idx
-        thisComp.drawableId = id
-        thisComp.textureId = body.components[1][idx]
-        thisComp.paletteId = GetPedPaletteVariation(ped, idx)
+        thisComp.comps.compId = idx
+        thisComp.comps.drawableId = id
+        thisComp.comps.textureId = body.components[1][idx]
+        thisComp.comps.paletteId = GetPedPaletteVariation(ped, idx)
+        thisComp.model = body.model
         result.push(thisComp)
     })
     return result

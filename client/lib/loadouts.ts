@@ -1,5 +1,7 @@
 import * as Cfx from 'fivem-js';
-import { Loadout, Team, LoadoutWeapon, PedComponents } from '../typings'
+import { Loadout, Team, LoadoutWeapon, PedComponents, OutfitKey } from '../typings'
+import { outfits } from "./outfits";
+import { castPedPedComponent } from "./";
 export class Loadouts {
   public static loadOuts: Loadout = {
     DEA: {
@@ -10,13 +12,13 @@ export class Loadouts {
       },
       "sniper": { outfit: "military_2", items: [{ name: "weapon_heavysniper_mk2", ammoCount: 9999, addons: ["COMPONENT_AT_SCOPE_NV", "COMPONENT_AT_SR_SUPP_03", "COMPONENT_AT_SR_BARREL_02", "COMPONENT_HEAVYSNIPER_MK2_CAMO_03"] },
       { name: "weapon_pistol_mk2", ammoCount: 9999, addons: ["COMPONENT_PISTOL_MK2_CLIP_02", "COMPONENT_AT_PI_SUPP_02", "COMPONENT_PISTOL_MK2_CAMO_03", "COMPONENT_AT_PI_FLSH_02"] },
-{ name: "weapon_knife", ammoCount: 9999, addons: [] }]}
+      { name: "weapon_knife", ammoCount: 9999, addons: [] }]}
     },
   
     NARCO: {
       "basic": {outfit: "narco_1", items: [{ name: "weapon_bullpuprifle_mk2", ammoCount: 9999, addons: [] }, { name: "weapon_combatshotgun", ammoCount: 9999, addons: [] },
         { name: "weapon_pistol_mk2", ammoCount: 9999, addons: [] }, { name: "weapon_smg_mk2", ammoCount: 9999, addons: [] }, { name: "weapon_compactlauncher", ammoCount: 3, addons: [] },
-{ name: "weapon_flashlight", ammoCount: 9999, addons: [] }, { name: "weapon_knife", ammoCount: 9999, addons: [] }, { name: "weapon_molotov", ammoCount: 3, addons: [] }]}
+        { name: "weapon_flashlight", ammoCount: 9999, addons: [] }, { name: "weapon_knife", ammoCount: 9999, addons: [] }, { name: "weapon_molotov", ammoCount: 3, addons: [] }]}
     },
     NONE: undefined
   }
@@ -41,11 +43,12 @@ export class Loadouts {
 /**
  * Accepts strings and hashes
  */
-  public static setPlayerModel(model: string | number, components: PedComponents[] = []): void {
-    SetPlayerModel(PlayerId(), (typeof model == "string") ? GetHashKey(model) : model)
+  public static setPlayerModel(outfit: OutfitKey): void {
+    const components = castPedPedComponent(outfits[outfit])
+    SetPlayerModel(PlayerId(), components[0].model)
     const ped = PlayerPedId()
     components.forEach((component: PedComponents) => {
-      SetPedComponentVariation(ped, component.compId, component.drawableId, component.textureId, component.paletteId)
+      SetPedComponentVariation(ped, component.comps.compId, component.comps.drawableId, component.comps.textureId, component.comps.paletteId)
     })
   }
 }
