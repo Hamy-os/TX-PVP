@@ -11,7 +11,7 @@ export class Loadouts {
         outfit: "military_4", items: [{ name: "weapon_combatpistol", ammoCount: 100, addons: [] }, { name: "weapon_minigun", ammoCount: 500, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }, { name: "weapon_bzgas", ammoCount: 4, addons: [] }]
       },
       "rusher": {
-        outfit: "military_2", items: [{ name: "weapon_pistol50", ammoCount: 100, addons: [] },
+        outfit: "military_2", items: [{ name: "weapon_pistol50", ammoCount: 100, addons: [] }, {name: "weapon_pumpshotgun_mk2", ammoCount: 100, addons: ["COMPONENT_AT_SIGHTS", "COMPONENT_AT_MUZZLE_08"]},
         { name: "weapon_assaultsmg", ammoCount: 200, addons: [] }, { name: "weapon_smokegrenade", ammoCount: 6, addons: [] }, { name: "weapon_flashlight", ammoCount: 1, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }]
       },
       "stealth": {

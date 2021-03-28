@@ -31,9 +31,11 @@ $(() => {
             $(".windSpeed").text(`Wind speed: ${(event.data.wSpeed * 3.6).toFixed(2)} km/h`)
             $(".droneHeight").text(`Height: ${event.data.height.toFixed(2)} m`)
             $(".droneHealth").text(`Health: ${event.data.health.toFixed(2)}%`)
-            if (event.data.health > 80) {
+            if (event.data.health > 90) {
                 $(".statusImg").attr("src", "img/health_100.png")
-            } else if (event.data.health <= 80 && event.data.health >= 40) {
+            } else if (event.data.health <= 90 && event.data.health >= 70) {
+                $(".statusImg").attr("src", "img/health_60.png")
+            } else if (event.data.health <= 70 && event.data.health >= 40) {
                 $(".statusImg").attr("src", "img/health_40.png")
             } else if (event.data.health < 40) {
                 $(".statusImg").attr("src", "img/health_low.png")
