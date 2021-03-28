@@ -19,8 +19,6 @@ export class Cameras {
   public static camIndex: number
   private static scaleformTick: number
   private static isNightVisionOn = false
-  private static angleY = 0.0
-  private static angleZ = 0.0
   private static coords: number[]
   private static clonedPed: number
   
@@ -243,28 +241,5 @@ export class Cameras {
       })
     })
   }
-  /* Didnt work yet, but I wont toss it out
-  private static getPoint(): void {
-    let mouseX = 0.0
-    let mouseY = 0.0
-    if (IsInputDisabled(0)) {
-      mouseX = GetDisabledControlNormal(1, 1) * 8.0
-      mouseY = GetDisabledControlNormal(1, 2) * 8.0
-    }
-    else {
-      mouseX = GetDisabledControlNormal(1, 1) * 1.5
-      mouseY = GetDisabledControlNormal(1, 2) * 1.5
-    }
-    // holy fucking shit, credit: https://github.com/Kiminaze/DeathCam/blob/master/client.lua
-    const offset = new Vector3(Math.cos(Cameras.angleZ) * Math.cos(Cameras.angleY) + Math.cos(Cameras.angleY) * Math.cos(Cameras.angleZ) / 4,
-    Math.sin(Cameras.angleZ) * Math.cos(Cameras.angleY) + Math.cos(Cameras.angleY) * Math.sin(Cameras.angleZ) / 4,
-    Math.sin(Cameras.angleY) * 2
-    )
-    const camCoords = castVec3(GetCamCoord(Cameras.createdCamera))
-    const finalCoords = new Vector3(camCoords.x + offset.x, camCoords.y + offset.y, camCoords.z + offset.z)
-    SetFocusArea(finalCoords.x, finalCoords.y, finalCoords.z, 0.0, 0.0, 0.0)
-    PointCamAtCoord(Cameras.createdCamera, finalCoords.x, finalCoords.y, finalCoords.z)
-  }
-  */
  
 }
