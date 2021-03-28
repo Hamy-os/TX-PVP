@@ -1,8 +1,9 @@
-import { setUpEvents, ServerCallback, addPlayerToTeam } from "./lib";
+import { setUpEvents, ServerCallback, addPlayerToTeam, Manager } from "./lib";
 import {Team} from "./typings"
 async function main() {
   setUpEvents()
   ServerCallback.listen()
+  Manager.listen()
   console.log("Running")
   RegisterCommand("addPlayerToTeam", (source: string, args: string[]) => {
     const src = source

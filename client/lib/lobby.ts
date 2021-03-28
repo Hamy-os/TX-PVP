@@ -1,6 +1,6 @@
 import * as Cfx from 'fivem-js';
 import { spawnLocations } from "./coords";
-import { Cameras } from "./";
+import { Cameras, Drones } from "./";
 import { Team } from "../typings";
 const playerCount = 0;
 
@@ -17,8 +17,10 @@ export class Lobby {
             Lobby.playerTeam = team
             console.log(`Assigned player to ${team}`)
             if (team == "NARCO") {
+                Cameras.setUpCameraUtils()
                 Cameras.showBlips()
             } else {
+                Drones.setUpDroneUtils()
                 Cameras.hideBlips()
             }
         })

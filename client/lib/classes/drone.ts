@@ -5,7 +5,8 @@ export class Drones {
   private static isDroneOpen = false;
   private static coords: number[] = []
   private static droneModel = GetHashKey("rcmavic")
-  private static currDrone: Cfx.Vehicle
+  private static currDrone: number
+  private static tick: number
 
   public static async setUpDroneUtils(): Promise<void> {
     const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
@@ -35,13 +36,11 @@ export class Drones {
     SetTimecycleModifierStrength(1.0)
     Drones.coords = GetEntityCoords(ped, false)
     emitNet("TXPVP:CORE:ClonePlayer", Drones.coords, Loadouts.model)
-    const position = new Cfx.Vector3(Drones.coords[0] + 5.0, Drones.coords[1] + 5.0, Drones.coords[2] + 5.0)
-    const vehicle = await Cfx.World.createVehicle(new Cfx.Model(Drones.droneModel), position, Cfx.Game.PlayerPed.Heading);
-    SetEntityInvincible(Cfx.Game.PlayerPed.Handle, true)
-    SetEntityInvincible(vehicle.Handle, true)
-    Cfx.Game.PlayerPed.setIntoVehicle(vehicle, Cfx.VehicleSeat.Driver);
-    Drones.currDrone = vehicle
+    const droneId = await ClientCallback.triggerServerCallback<number>("createDrone")
+    Drones.tick = setTick(() => {DisableControlAction(2, 75, true)})
+    Drones.currDrone = droneId
     Drones.isDroneOpen = true
+    SetEntityInvincible(NetToVeh(droneId), true)
     setTimeout(() => { DoScreenFadeIn(500),  SendNuiMessage(JSON.stringify({
       type: "droneVisible",
       value: true,
@@ -50,10 +49,12 @@ export class Drones {
   public static closeDrone(): void {
     DoScreenFadeOut(50)
     emitNet("TXPVP:CORE:DeleteClone")
-    Drones.currDrone.delete()
+    emitNet("TXPVP:CORE:DeleteDrone")
     const ped = PlayerPedId()
     SetEntityInvincible(ped, false)
+    clearTick(Drones.tick)
     ClearTimecycleModifier();
+    SetEntityInvincible(NetToVeh(Drones.currDrone), true)
     Drones.isDroneOpen = false
     SetEntityCoords(ped, Drones.coords[0], Drones.coords[1], Drones.coords[2], false, false, false, false)
     setTimeout(() => { DoScreenFadeIn(500);   SendNuiMessage(JSON.stringify({
