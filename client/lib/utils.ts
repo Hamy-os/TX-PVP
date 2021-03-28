@@ -1,5 +1,5 @@
 import { spawnLocations } from "./";
-import { CastedMatrix, MatrixIndexes, PedComponents, RawOutfitDict } from "./../typings";
+import { CastedMatrix, MatrixIndexes, PedComponents, RawOutfitDict, PedProps } from "./../typings";
 import * as Cfx from 'fivem-js';
 
 
@@ -29,17 +29,32 @@ export function casMatrix(arr: [number[], number[], number[], number[]]): Casted
          return keyedObject as CastedMatrix
 }
 
-export function castPedPedComponent(body: RawOutfitDict): PedComponents[] {
+export function castPedPedComponent(body: RawOutfitDict): [PedComponents[], PedProps[]] {
+    console.log("Casting components")
     const ped = PlayerPedId()
     const result: PedComponents[] = []
+    const result2: PedProps[] = []
     body.components[0].forEach((id: number, idx: number) => {
-        let thisComp: PedComponents
-        thisComp.comps.compId = idx
-        thisComp.comps.drawableId = id
-        thisComp.comps.textureId = body.components[1][idx]
-        thisComp.comps.paletteId = GetPedPaletteVariation(ped, idx)
-        thisComp.model = body.model
+        const thisComp: PedComponents = {
+            comps: {
+                compId: idx,
+                drawableId: id,
+                textureId: body.components[1][idx],
+                paletteId: GetPedPaletteVariation(ped, idx),
+            }
+        }
         result.push(thisComp)
     })
-    return result
+    for (let i = 0; i <= 2; i++) {
+        const thisProp = {
+            props: {
+                compId: i,
+                drawableId: body.props[0][i],
+                textureId: body.props[1][i],
+            }
+        }
+        result2.push(thisProp)
+    }
+    console.log("Returning from casting")
+    return [result, result2]
 }

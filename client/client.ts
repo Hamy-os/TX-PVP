@@ -8,6 +8,7 @@ setupLobbyEvents()
 setupMapEvents()
 ClientCallback.listen()
 Loadouts.listen()
+
 Cameras.setUpCameraUtils()
 console.log("Setting up commands")
 RegisterCommand("join", async (source: string, args: string[]) => {
@@ -37,6 +38,7 @@ RegisterCommand("tp", (source: string, args: string[]) => {
 
  
 RegisterCommand("getLoadout", (source: string, args: string[]) => {
+  console.log("Command triggered")
   Loadouts.giveLoadoutToPlayer(args[0], args[1] as Team)
 }, true)
 
