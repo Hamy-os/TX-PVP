@@ -5,7 +5,7 @@ export const narco_2: RawOutfitDict = {
         [
             44,
             126,
-            Math.floor(Math.random() * Math.floor(36)),
+            50,
             1,
             7,
             0,

@@ -5,7 +5,7 @@ export const military_4: RawOutfitDict = {
         [
             44,
             0,
-            Math.floor(Math.random() * Math.floor(36)),
+            50,
             1,
             31,
             0,
