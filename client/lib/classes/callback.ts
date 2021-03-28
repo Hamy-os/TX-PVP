@@ -25,7 +25,7 @@ export class ClientCallback {
       emitNet(`TXPVP:CORE:sv_cb_trigger`, name, args)
       console.log("Triggered callback")
       onNet(`TXPVP:CORE:sv_cb_receive:${name}`, (...result: unknown[]) => {
-        resolve(result as unknown as T)
+        resolve(result[0] as unknown as T)
       })
 
     })

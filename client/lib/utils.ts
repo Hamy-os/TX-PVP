@@ -14,7 +14,7 @@ export function castVec3(arr: number[]): Cfx.Vector3 {
     return new Cfx.Vector3(arr[0], arr[1], arr[2])
 }
 
-export function casMatrix(arr: [number[], number[], number[], number[]]): CastedMatrix {
+export function castMatrix(arr: [number[], number[], number[], number[]]): CastedMatrix {
     const keyedObject: CastedMatrix = {
         rightVector: new Cfx.Vector3(0.00, 0.00, 0.0),
         forwardVector: new Cfx.Vector3(0.00, 0.00, 0.0),
@@ -29,8 +29,7 @@ export function casMatrix(arr: [number[], number[], number[], number[]]): Casted
          return keyedObject as CastedMatrix
 }
 
-export function castPedPedComponent(body: RawOutfitDict): [PedComponents[], PedProps[]] {
-    const ped = PlayerPedId()
+export function castPedPedComponent(body: RawOutfitDict, ped = PlayerPedId()): [PedComponents[], PedProps[]] {
     const result: PedComponents[] = []
     const result2: PedProps[] = []
     body.components[0].forEach((id: number, idx: number) => {

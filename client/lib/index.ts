@@ -7,4 +7,5 @@ export * from "./classes/blip"
 export * from "./classes/teleport"
 export * from "./classes/camera"
 export * from "./classes/callback"
+export * from "./classes/notifications"
 export * from "./json";

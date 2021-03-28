@@ -18,7 +18,7 @@ RegisterCommand("join", async (source: string, args: string[]) => {
 
 
 RegisterCommand("team", async (source: string, args: string[]) => {
-  const result = await ClientCallback.triggerServerCallback<Team>("getPlayerTeam")
+  const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
   console.log(result)
 }, true)
 

@@ -1,6 +1,6 @@
 import * as Cfx from 'fivem-js';
 import { Vector3 } from 'fivem-js';
-import { cameraLocations, castVec3, casMatrix } from "../";
+import { cameraLocations, castVec3, castMatrix, Loadouts } from "../";
 import { Blip } from "./blip";
 export const Keys = {
 	["ESC"] : 322, ["F1"] : 288, ["F2"] : 289, ["F3"] : 170, ["F5"] : 166, ["F6"] : 167, ["F7"] : 168, ["F8"] : 169, ["F9"] : 56, ["F10"] : 57,
@@ -59,7 +59,7 @@ export class Cameras {
   }
   public static async openCamera(index = 0): Promise<void> {
     const ped = PlayerPedId()
-    emitNet("TXPVP:CORE:ClonePlayer", GetEntityCoords(ped, false))
+    emitNet("TXPVP:CORE:ClonePlayer", GetEntityCoords(ped, false), Loadouts.model)
     Cameras.coords = GetEntityCoords(ped, false)
     //Cameras.clonedPed = ClonePed(ped, GetEntityHeading(ped), true, true)
     this.ChangeCamera(index)
