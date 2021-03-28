@@ -41,7 +41,7 @@ export class Blip {
     RemoveBlip(this.blipId)
     this.setDisplay(0)
   }
- 
+
 
   public setColor(color: BlipColor): void {
     SetBlipColour(this.blipId, color)

@@ -25,13 +25,17 @@ export class Manager {
     onNet("TXPVP:CORE:globalizeBlip", (targets: ServerId[] | Team, coords: number[], sprite: number, color: number, id: string, visibility: number, title: string) => {
       const src = source
       if (typeof targets == "object") {
-        targets.forEach((id: ServerId) => {
-          emitNet("TXPVP:CORE:createBlip", id, coords, sprite, color, id, visibility, title)
+        targets.forEach((idx: ServerId) => {
+          if (idx != src) { // prevent dupe blips
+            emitNet("TXPVP:CORE:createBlip", idx, coords, sprite, color, id, visibility, title)
+          }
         })
       } else {
         const teams = getTeams()[targets]
         for (const [k, v] of Object.entries(teams)) {
-          emitNet("TXPVP:CORE:createBlip", k, coords, sprite, color, id, visibility, title)
+          if (k != src) {
+            emitNet("TXPVP:CORE:createBlip", k, coords, sprite, color, id, visibility, title)
+          }
         }
       }
     })
