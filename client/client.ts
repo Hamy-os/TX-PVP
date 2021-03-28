@@ -1,6 +1,6 @@
 import * as Cfx from 'fivem-js';
 import { Loadouts } from "./lib/loadouts";
-import {spawnLocations, setupMapEvents, Cameras, ClientCallback, Lobby} from "./lib"
+import {spawnLocations, setupMapEvents, Cameras, Drones, ClientCallback, Lobby} from "./lib"
 import { Team } from "./typings";
 /**Init functions */
 
@@ -10,6 +10,7 @@ ClientCallback.listen()
 Loadouts.listen()
 
 Cameras.setUpCameraUtils()
+Drones.setUpDroneUtils()
 
 setInterval(() => {RestorePlayerStamina(PlayerId(), 1.0)}, 500)
 console.log("Setting up commands")

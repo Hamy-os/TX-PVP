@@ -24,42 +24,43 @@ export class Cameras {
   private static clonedPed: number
   private static blips: Blip[] = []
   
-  public static setUpCameraUtils(): void {
-    RegisterCommand("openCamera", async () => {
-      const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
-      if (result[0] == "NARCO") {
-        if (Cameras.cameraActive) {
-          Cameras.CloseCamera()
-        } else {
-          Cameras.openCamera(Cameras.camIndex || 0)
+  public static async setUpCameraUtils(): Promise<void> {
+    const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
+    if (result[0] == "NARCO") {
+      RegisterCommand("openCamera", () => {
+        if (result[0] == "NARCO") {
+          if (Cameras.cameraActive) {
+            Cameras.CloseCamera()
+          } else {
+            Cameras.openCamera(Cameras.camIndex || 0)
+          }
         }
-      }
-    }, false)
-    
-    RegisterCommand("scrollCameraRight", () => {
-      if (Cameras.cameraActive) {
-        Cameras.ChangeCamera(Cameras.camIndex + 1)
-      }
-    }, false)
-    
-    RegisterCommand("scrollCameraLeft", () => {
-      if (Cameras.cameraActive) {
-        Cameras.ChangeCamera(Cameras.camIndex - 1)
-      }
-    }, false)
-    RegisterCommand("cameraNightVision", () => {
-      if (Cameras.cameraActive) {
-        Cameras.ToggleNightVisison(!Cameras.isNightVisionOn)
-      }
-    }, false)
-
-
-
-    RegisterKeyMapping('openCamera', 'Open your camera', 'keyboard', 'b')
-    RegisterKeyMapping('scrollCameraRight', 'Next camera', 'keyboard', 'e')
-    RegisterKeyMapping('scrollCameraLeft', 'Previous camera', 'keyboard', 'q')
-    RegisterKeyMapping('cameraNightVision', 'Toggle camera night visison', 'keyboard', 'n')
-    
+      }, false)
+      
+      RegisterCommand("scrollCameraRight", () => {
+        if (Cameras.cameraActive) {
+          Cameras.ChangeCamera(Cameras.camIndex + 1)
+        }
+      }, false)
+      
+      RegisterCommand("scrollCameraLeft", () => {
+        if (Cameras.cameraActive) {
+          Cameras.ChangeCamera(Cameras.camIndex - 1)
+        }
+      }, false)
+      RegisterCommand("cameraNightVision", () => {
+        if (Cameras.cameraActive) {
+          Cameras.ToggleNightVisison(!Cameras.isNightVisionOn)
+        }
+      }, false)
+  
+  
+  
+      RegisterKeyMapping('openCamera', 'Open your camera', 'keyboard', 'b')
+      RegisterKeyMapping('scrollCameraRight', 'Next camera', 'keyboard', 'e')
+      RegisterKeyMapping('scrollCameraLeft', 'Previous camera', 'keyboard', 'q')
+      RegisterKeyMapping('cameraNightVision', 'Toggle camera night visison', 'keyboard', 'n') 
+    }
   }
   public static async openCamera(index = 0): Promise<void> {
     const ped = PlayerPedId()
