@@ -1,6 +1,6 @@
 import * as Cfx from 'fivem-js';
 import { Loadouts } from "./lib/loadouts";
-import {spawnLocations, setupMapEvents, Cameras, Drones, ClientCallback, Lobby} from "./lib"
+import {spawnLocations, setupMapEvents, Cameras, Drones, ClientCallback, Lobby, Blip} from "./lib"
 import { Team } from "./typings";
 /**Init functions */
 
@@ -8,7 +8,7 @@ Lobby.listen()
 setupMapEvents()
 ClientCallback.listen()
 Loadouts.listen()
-
+Blip.listen()
 Cameras.setUpCameraUtils()
 Drones.setUpDroneUtils()
 

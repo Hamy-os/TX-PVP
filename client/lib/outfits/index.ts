@@ -20,6 +20,6 @@ military_5,
 narco_1,
 narco_2,
 narco_3,
-  narco_4,
-  narco_5
+narco_4,
+narco_5
 }
