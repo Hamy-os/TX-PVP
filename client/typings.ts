@@ -12,8 +12,8 @@ export type MatrixIndexes = "rightVector" | "forwardVector" | "upVector" | "posi
 export interface PedComponents { comps: { compId: number, drawableId: number, textureId: number, paletteId: number } }
 export interface PedProps { props: {compId: number, drawableId: number, textureId: number} }
 
-export type OutfitKey = "military_1" | "military_2" | "military_3" | "military_4" | 
-                        "narco_1" | "narco_2" | "narco_3" | "narco_4" 
+export type OutfitKey = "military_1" | "military_2" | "military_3" | "military_4" | "military_5" | 
+                        "narco_1" | "narco_2" | "narco_3" | "narco_4" | "narco_5"
 export interface RawOutfitDict  {
   components: [
     number[],

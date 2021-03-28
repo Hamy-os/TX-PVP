@@ -1,45 +1,46 @@
+
 import {RawOutfitDict} from "../../../typings"
 
-export const military_2: RawOutfitDict = {
+export const narco_5: RawOutfitDict = {
     "components": [
         [
             44,
-            104,
+            52,
             50,
-            156,
-            87,
-            38,
-            62,
+            0,
             31,
-            15,
+            0,
+            24,
+            0,
+            171,
             0,
             0,
-            214
+            208
         ],
         [
             0,
-            3,
+            1,
             0,
-            3,
-            3,
             0,
-            6,
             1,
             0,
             0,
             0,
-            3
+            1,
+            0,
+            0,
+            9
         ]
     ],
     "model": 1885233650,
     "props": [
         [
-            118,
+            -1,
             -1,
             -1
         ],
         [
-            15,
+            -1,
             -1,
             -1
         ]
