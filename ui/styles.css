@@ -40,3 +40,28 @@
     width: fit-content;
     margin-right: 10px;
 }
+
+.data {
+    font-family: arial;
+    color: ivory;
+    position: relative;
+    margin-top: 25%;
+    text-align: center;
+}
+
+.left {
+    float: left;
+    text-align: left;
+    margin-left: 5%;
+}
+
+.right {
+    float: right;
+    text-align: right;
+    margin-right: 5%;
+}
+
+.statusImg {
+    width: 150px;
+    height: 150px;
+}

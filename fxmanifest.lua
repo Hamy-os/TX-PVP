@@ -4,7 +4,8 @@ ui_page 'ui/index.html'
 files {
     "ui/*.js",
     "ui/*.html",
-    "ui/*.css"
+    "ui/*.css",
+    "ui/img/*.png"
 }
 server_script 'dist/server/*.server.js'
 

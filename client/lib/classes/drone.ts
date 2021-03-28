@@ -7,6 +7,7 @@ export class Drones {
   private static droneModel = GetHashKey("rcmavic")
   private static currDrone: number
   private static tick: number
+  private static interval: NodeJS.Timeout
 
   public static async setUpDroneUtils(): Promise<void> {
     const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
@@ -37,10 +38,23 @@ export class Drones {
     Drones.coords = GetEntityCoords(ped, false)
     emitNet("TXPVP:CORE:ClonePlayer", Drones.coords, Loadouts.model)
     const droneId = await ClientCallback.triggerServerCallback<number>("createDrone")
-    Drones.tick = setTick(() => {DisableControlAction(2, 75, true)})
+    Drones.tick = setTick(() => { DisableControlAction(2, 75, true) })
+    Drones.interval = setInterval(() => {
+      const localId = GetVehiclePedIsIn(ped, false)
+      const health = GetEntityHealth(localId) / 10
+      SendNuiMessage(JSON.stringify({
+        type: "setDroneProps",
+        speed: GetEntitySpeed(ped),
+        wSpeed: GetWindSpeed(),
+        height: GetEntityHeightAboveGround(ped),
+        health: health
+      }))
+      if (health <= 20) {
+        Drones.closeDrone()
+      }
+    }, 30)
     Drones.currDrone = droneId
     Drones.isDroneOpen = true
-    SetEntityInvincible(NetToVeh(droneId), true)
     setTimeout(() => { DoScreenFadeIn(500),  SendNuiMessage(JSON.stringify({
       type: "droneVisible",
       value: true,
@@ -53,6 +67,7 @@ export class Drones {
     const ped = PlayerPedId()
     SetEntityInvincible(ped, false)
     clearTick(Drones.tick)
+    clearInterval(Drones.interval)
     ClearTimecycleModifier();
     SetEntityInvincible(NetToVeh(Drones.currDrone), true)
     Drones.isDroneOpen = false
