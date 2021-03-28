@@ -59,6 +59,7 @@ export class Cameras {
   }
   public static async openCamera(index = 0): Promise<void> {
     const ped = PlayerPedId()
+    DoScreenFadeOut(100)
     emitNet("TXPVP:CORE:ClonePlayer", GetEntityCoords(ped, false), Loadouts.model)
     Cameras.coords = GetEntityCoords(ped, false)
     //Cameras.clonedPed = ClonePed(ped, GetEntityHeading(ped), true, true)
@@ -67,17 +68,17 @@ export class Cameras {
     Cameras.scaleformTick = setTick(() => { DrawScaleformMovieFullscreen(instructions, 255, 255, 255, 255, 0), Cameras.rotate()})
     SetTimecycleModifier("scanline_cam_cheap")
     SetTimecycleModifierStrength(2.0)
-    SendNuiMessage(JSON.stringify({
+    SetFocusArea(cameraLocations[index].coords.x, cameraLocations[index].coords.y, cameraLocations[index].coords.z, cameraLocations[index].coords.x, cameraLocations[index].coords.y, cameraLocations[index].coords.z)
+    FreezeEntityPosition(PlayerPedId(), true)
+    DisplayRadar(false)
+    this.cameraActive = true
+    setTimeout(() => { DoScreenFadeIn(500),  SendNuiMessage(JSON.stringify({
       type: "cameraVisible",
       value: true,
       location: cameraLocations[index].name,
       count: cameraLocations.length,
       index: index
-    }))
-    SetFocusArea(cameraLocations[index].coords.x, cameraLocations[index].coords.y, cameraLocations[index].coords.z, cameraLocations[index].coords.x, cameraLocations[index].coords.y, cameraLocations[index].coords.z)
-    FreezeEntityPosition(PlayerPedId(), true)
-    DisplayRadar(false)
-    this.cameraActive = true
+    })) }, 500)
     
   }
   public static ToggleNightVisison(toggle: boolean): void {
@@ -85,13 +86,12 @@ export class Cameras {
     SetNightvision(toggle)
   }
   public static CloseCamera(): void {
+    DoScreenFadeOut(100)
     const ped = PlayerPedId()
-    //DeleteEntity(Cameras.clonedPed)
     emitNet("TXPVP:CORE:DeleteClone")
     SetEntityInvincible(ped, false)
     SetEntityAlpha(ped, 255, 0)
     SetEntityCoords(ped, Cameras.coords[0], Cameras.coords[1], Cameras.coords[2], false, false, false, false)
-
     DestroyCam(this.createdCamera, false)
     ClearTimecycleModifier();
     Cameras.ToggleNightVisison(false)
@@ -102,10 +102,10 @@ export class Cameras {
     DisplayRadar(true)
     clearTick(Cameras.scaleformTick)
     this.cameraActive = false
-    SendNuiMessage(JSON.stringify({
+    setTimeout(() => { DoScreenFadeIn(500);   SendNuiMessage(JSON.stringify({
       type: "cameraVisible",
       value: false
-    }))
+    }))}, 500)
   }
   public static showBlips(): void {
     cameraLocations.forEach((data: { coords: Vector3, rot: number, name: string }, idx: number) => {
