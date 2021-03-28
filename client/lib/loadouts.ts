@@ -7,47 +7,48 @@ export class Loadouts {
   private static outfit: string
   public static loadOuts: Loadout = {
     DEA: {
-      "RIOT": {
-        outfit: "riot", items: [{ name: "weapon_combatpistol", ammoCount: 100, addons: [] }, { name: "weapon_minigun", ammoCount: 500, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }, { name: "weapon_bzgas", ammoCount: 4, addons: [] }]
+      "riot": {
+        outfit: "military_1", items: [{ name: "weapon_combatpistol", ammoCount: 100, addons: [] }, { name: "weapon_minigun", ammoCount: 500, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }, { name: "weapon_bzgas", ammoCount: 4, addons: [] }]
       },
-      "RUSHER": {
-        outfit: "rush", items: [{ name: "weapon_pistol50", ammoCount: 100, addons: [] },
+      "rusher": {
+        outfit: "military_2", items: [{ name: "weapon_pistol50", ammoCount: 100, addons: [] },
         { name: "weapon_assaultsmg", ammoCount: 200, addons: [] }, { name: "weapon_smokegrenade", ammoCount: 6, addons: [] }, { name: "weapon_flashlight", ammoCount: 1, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }]
       },
-      "STEALTH": {
-        outfit: "ninja", items: [{ name: "weapon_militaryrifle", ammoCount: 200, addons: ["COMPONENT_AT_AR_SUPP"] },
+      "stealth": {
+        outfit: "military_3", items: [{ name: "weapon_militaryrifle", ammoCount: 200, addons: ["COMPONENT_AT_AR_SUPP"] },
         { name: "weapon_proxmine", ammoCount: 20, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }, { name: "WEAPON_COMBATPISTOL", ammoCount: 250, addons: ["COMPONENT_AT_PI_SUPP"] }]
       },
-      "KABOOM": {
-        outfit: "explosion", items: [{ name: "weapon_rpg", ammoCount: 20, addons: [] },
+      "kaboom": {
+        outfit: "military_4", items: [{ name: "weapon_rpg", ammoCount: 20, addons: [] },
         { name: "weapon_pipebomb", ammoCount: 10, addons: [] }, { name: "WEAPON_COMBATPISTOL", ammoCount: 100, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }]
       },
-      "sniper": { outfit: "sniper", items: [{ name: "weapon_heavysniper_mk2", ammoCount: 100, addons: ["COMPONENT_AT_SCOPE_NV", "COMPONENT_AT_SR_SUPP_03", "COMPONENT_AT_SR_BARREL_02", "COMPONENT_HEAVYSNIPER_MK2_CAMO_03"] },
+      "sniper": { outfit: "military_5", items: [{ name: "weapon_heavysniper_mk2", ammoCount: 100, addons: ["COMPONENT_AT_SCOPE_NV", "COMPONENT_AT_SR_SUPP_03", "COMPONENT_AT_SR_BARREL_02", "COMPONENT_HEAVYSNIPER_MK2_CAMO_03"] },
       { name: "weapon_pistol_mk2", ammoCount: 100, addons: ["COMPONENT_PISTOL_MK2_CLIP_02", "COMPONENT_AT_PI_SUPP_02", "COMPONENT_PISTOL_MK2_CAMO_03", "COMPONENT_AT_PI_FLSH_02"] },
       { name: "weapon_knife", ammoCount: 1, addons: [] }]}
     },
   
     NARCO: {
-      "DRUG_LORD": {outfit: "narco_1", items: [{ name: "weapon_assaultrifle", ammoCount: 200, addons: [] }, { name: "weapon_combatshotgun", ammoCount: 100, addons: [] },
+      "lord": {outfit: "narco_1", items: [{ name: "weapon_assaultrifle", ammoCount: 200, addons: [] }, { name: "weapon_combatshotgun", ammoCount: 100, addons: [] },
         { name: "weapon_pistol_mk2", ammoCount: 100, addons: [] }, 
-        { name: "weapon_flashlight", ammoCount: 1, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }, { name: "weapon_molotov", ammoCount: 3, addons: [] }]}
+        { name: "weapon_flashlight", ammoCount: 1, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }, { name: "weapon_molotov", ammoCount: 3, addons: [] }]
+      },
+      "security": {
+        outfit: "narco_2", items: [{ name: "weapon_pistol50", ammoCount: 100, addons: [] } ,
+        { name: "weapon_assaultsmg", ammoCount: 200, addons: [] }, { name: "weapon_smokegrenade", ammoCount: 6, addons: [] }, { name: "weapon_flashlight", ammoCount: 1, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }]
+        },
+      "ninja": {
+    outfit: "narco_3", items: [{ name: "weapon_militaryrifle", ammoCount: 200, addons: ["COMPONENT_AT_AR_SUPP"] },
+    { name: "weapon_stickybomb", ammoCount: 20, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }, { name: "WEAPON_COMBATPISTOL", ammoCount: 250, addons: ["COMPONENT_AT_PI_SUPP"] }]
+          },
+      "triggerFinger": {
+        outfit: "narco_4", items: [{ name: "weapon_rpg", ammoCount: 20, addons: [] },
+        { name: "weapon_pipebomb", ammoCount: 10, addons: [] }, { name: "WEAPON_COMBATPISTOL", ammoCount: 100, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }]
+        },
+      "sniper": { outfit: "narco_5", items: [{ name: "weapon_heavysniper", ammoCount: 100, addons: ["COMPONENT_AT_SCOPE_MAX"] },
+  { name: "weapon_pistol_mk2", ammoCount: 120, addons: ["COMPONENT_PISTOL_MK2_CLIP_02", "COMPONENT_AT_PI_SUPP_02", "COMPONENT_PISTOL_MK2_CAMO_03", "COMPONENT_AT_PI_FLSH_02"] },
+  { name: "weapon_knife", ammoCount: 1, addons: [] }]
+      },
     },
-    "SECURITY": {
-      outfit: "narco_2", items: [{ name: "weapon_pistol50", ammoCount: 100, addons: [] },
-      { name: "weapon_assaultsmg", ammoCount: 200, addons: [] }, { name: "weapon_smokegrenade", ammoCount: 6, addons: [] }, { name: "weapon_flashlight", ammoCount: 1, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }]
-    },
-    "DRUG_NINJA": {
-      outfit: "narco_3", items: [{ name: "weapon_militaryrifle", ammoCount: 200, addons: ["COMPONENT_AT_AR_SUPP"] },
-      { name: "weapon_stickybomb", ammoCount: 20, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }, { name: "WEAPON_COMBATPISTOL", ammoCount: 250, addons: ["COMPONENT_AT_PI_SUPP"] }]
-    },
-    "TRIGGER_FINGER": {
-      outfit: "narco_4", items: [{ name: "weapon_rpg", ammoCount: 20, addons: [] },
-      { name: "weapon_pipebomb", ammoCount: 10, addons: [] }, { name: "WEAPON_COMBATPISTOL", ammoCount: 100, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }]
-    },
-    "SNIPER": { outfit: "narco_5", items: [{ name: "weapon_heavysniper", ammoCount: 100, addons: ["COMPONENT_AT_SCOPE_MAX"] },
-    { name: "weapon_pistol_mk2", ammoCount: 120, addons: ["COMPONENT_PISTOL_MK2_CLIP_02", "COMPONENT_AT_PI_SUPP_02", "COMPONENT_PISTOL_MK2_CAMO_03", "COMPONENT_AT_PI_FLSH_02"] },
-    { name: "weapon_knife", ammoCount: 1, addons: [] }]
-  },
     NONE: undefined
   }
   public static get details(): { team: string, loadout: string } {
@@ -57,7 +58,7 @@ export class Loadouts {
     return Loadouts.outfit
   }
 
-  public static listen() {
+  public static listen(): void {
     onNet("TXPVP:CORE:setLoadout", (loadout: string, team: Team) => {
       Loadouts.giveLoadoutToPlayer(loadout, team)
     })

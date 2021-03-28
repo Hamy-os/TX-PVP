@@ -1,6 +1,6 @@
 import {RawOutfitDict} from "../../../typings"
 
-export const sniper: RawOutfitDict = {
+export const military_4: RawOutfitDict = {
   "components": [
     [
         44,

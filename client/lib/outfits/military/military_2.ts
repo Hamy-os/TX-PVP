@@ -1,45 +1,46 @@
 import {RawOutfitDict} from "../../../typings"
-export const riot: RawOutfitDict = {
+
+export const military_2: RawOutfitDict = {
     "components": [
         [
             44,
-            0,
+            104,
             50,
-            4,
+            156,
+            87,
+            38,
+            62,
             31,
-            0,
-            24,
-            0,
             15,
             0,
             0,
-            50
+            214
         ],
         [
             0,
+            3,
+            0,
+            3,
+            3,
+            0,
+            6,
+            1,
             0,
             0,
             0,
-            4,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            4
+            3
         ]
     ],
     "model": 1885233650,
     "props": [
         [
+            118,
             -1,
-            8,
             -1
         ],
         [
+            15,
             -1,
-            3,
             -1
         ]
     ]

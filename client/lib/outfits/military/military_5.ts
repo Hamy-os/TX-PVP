@@ -1,6 +1,6 @@
 import {RawOutfitDict} from "../../../typings"
 
-export const rush: RawOutfitDict = {
+export const military_5: RawOutfitDict = {
   "components": [
     [
         44,
