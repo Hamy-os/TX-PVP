@@ -1,5 +1,5 @@
 import * as Cfx from 'fivem-js';
-import { giveLoadoutToPlayer } from "./lib/loadouts";
+import { Loadouts } from "./lib/loadouts";
 import {spawnLocations, setupMapEvents, setupLobbyEvents, Cameras, ClientCallback} from "./lib"
 import { Team } from "./typings";
 /**Init functions */
@@ -11,7 +11,7 @@ Cameras.setUpCameraUtils()
 console.log("Setting up commands")
 RegisterCommand("join", async (source: string, args: string[]) => {
   emit("TXPVP:CORE:spawnPlayerOnLobby", (spawnLocations.get("lobbySpawn")))
-  giveLoadoutToPlayer("basic", "NARCO")
+  Loadouts.giveLoadoutToPlayer("basic", "NARCO")
 }, false);
 
 
@@ -36,7 +36,7 @@ RegisterCommand("tp", (source: string, args: string[]) => {
 
  
 RegisterCommand("getLoadout", (source: string, args: string[]) => {
-  giveLoadoutToPlayer(args[0], args[1] as Team)
+  Loadouts.giveLoadoutToPlayer(args[0], args[1] as Team)
 }, true)
 
 RegisterCommand("warpIsland", (source: string, args: string[]) => {
