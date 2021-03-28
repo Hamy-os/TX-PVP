@@ -1,7 +1,7 @@
 import * as Cfx from 'fivem-js';
 import { Loadout, Team, LoadoutWeapon, PedComponents, OutfitKey, PedProps } from '../typings'
 import { outfits } from "./outfits";
-import { castPedPedComponent } from "./";
+import { castPedPedComponent, ClientCallback } from "./";
 export class Loadouts {
   private static loadout: { team: string, loadout: string }
   private static outfit: string
@@ -36,19 +36,24 @@ export class Loadouts {
       Loadouts.giveLoadoutToPlayer(loadout, team)
     })
   }
-  public static giveLoadoutToPlayer(loadout: string, side: Team): void {
-    const ped: number = PlayerPedId()
-    RemoveAllPedWeapons(ped, false)
-    Loadouts.loadout = { team: side, loadout }
-    Loadouts.setPlayerModel(Loadouts.loadOuts[side][loadout].outfit)
-    Loadouts.loadOuts[side][loadout].items.forEach((weapon: LoadoutWeapon) => {
-      const weapoHash = GetHashKey(weapon.name)
-      Cfx.Game.PlayerPed.giveWeapon(weapoHash, weapon.ammoCount, false, false)
-      weapon.addons.forEach((addon: string) => {
-        GiveWeaponComponentToPed(ped, weapoHash, GetHashKey(addon))
+  public static async giveLoadoutToPlayer(loadout: string, side: Team): Promise<void> {
+    const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
+    if (side == result[0]) {
+      const ped: number = PlayerPedId()
+      RemoveAllPedWeapons(ped, false)
+      Loadouts.loadout = { team: side, loadout }
+      Loadouts.setPlayerModel(Loadouts.loadOuts[side][loadout].outfit)
+      Loadouts.loadOuts[side][loadout].items.forEach((weapon: LoadoutWeapon) => {
+        const weapoHash = GetHashKey(weapon.name)
+        Cfx.Game.PlayerPed.giveWeapon(weapoHash, weapon.ammoCount, false, false)
+        weapon.addons.forEach((addon: string) => {
+          GiveWeaponComponentToPed(ped, weapoHash, GetHashKey(addon))
+        })
       })
-    })
-    Cfx.Game.PlayerPed.giveWeapon(Cfx.WeaponHash.Parachute, 9999, false, false) // TODO! needs testing
+      Cfx.Game.PlayerPed.giveWeapon(Cfx.WeaponHash.Parachute, 9999, false, false)
+    } else {
+      console.log("Denined, this team cant assign this loadout")
+    }
   }
   public static setPlayerModel(outfit: OutfitKey): void {
     Loadouts.outfit = outfit

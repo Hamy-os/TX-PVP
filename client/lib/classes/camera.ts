@@ -1,6 +1,7 @@
 import * as Cfx from 'fivem-js';
 import { Vector3 } from 'fivem-js';
-import { cameraLocations, castVec3, castMatrix, Loadouts } from "../";
+import { Team } from "../../typings";
+import { cameraLocations, castVec3, castMatrix, Loadouts, ClientCallback } from "../";
 import { Blip } from "./blip";
 export const Keys = {
 	["ESC"] : 322, ["F1"] : 288, ["F2"] : 289, ["F3"] : 170, ["F5"] : 166, ["F6"] : 167, ["F7"] : 168, ["F8"] : 169, ["F9"] : 56, ["F10"] : 57,
@@ -21,13 +22,17 @@ export class Cameras {
   private static isNightVisionOn = false
   private static coords: number[]
   private static clonedPed: number
+  private static blips: Blip[] = []
   
   public static setUpCameraUtils(): void {
-    RegisterCommand("openCamera", () => {
-      if (Cameras.cameraActive) {
-        Cameras.CloseCamera()
-      } else {
-        Cameras.openCamera(Cameras.camIndex || 0)
+    RegisterCommand("openCamera", async () => {
+      const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
+      if (result[0] == "NARCO") {
+        if (Cameras.cameraActive) {
+          Cameras.CloseCamera()
+        } else {
+          Cameras.openCamera(Cameras.camIndex || 0)
+        }
       }
     }, false)
     
@@ -54,7 +59,6 @@ export class Cameras {
     RegisterKeyMapping('scrollCameraRight', 'Next camera', 'keyboard', 'e')
     RegisterKeyMapping('scrollCameraLeft', 'Previous camera', 'keyboard', 'q')
     RegisterKeyMapping('cameraNightVision', 'Toggle camera night visison', 'keyboard', 'n')
-    Cameras.showBlips()
     
   }
   public static async openCamera(index = 0): Promise<void> {
@@ -86,7 +90,7 @@ export class Cameras {
     SetNightvision(toggle)
   }
   public static CloseCamera(): void {
-    DoScreenFadeOut(100)
+    DoScreenFadeOut(50)
     const ped = PlayerPedId()
     emitNet("TXPVP:CORE:DeleteClone")
     SetEntityInvincible(ped, false)
@@ -109,12 +113,18 @@ export class Cameras {
   }
   public static showBlips(): void {
     cameraLocations.forEach((data: { coords: Vector3, rot: number, name: string }, idx: number) => {
-      new Blip(data.coords, 604, 34, idx.toString(), 10, `CCTV (${data.name})`, (blipId: number) => {
+      const b = new Blip(data.coords, 604, 34, idx.toString(), 10, `CCTV (${data.name})`, (blipId: number) => {
         SetBlipRotation(blipId, 90)
         SetBlipCategory(blipId, 1)
         SetBlipAsFriendly(blipId, true)
         SetBlipColour(blipId, 2)
+      })
+      Cameras.blips.push(b)
     })
+  }
+  public static hideBlips(): void {
+    Cameras.blips.forEach((blip: Blip) => {
+      blip.delete()
     })
   }
   public static rotate(): void {

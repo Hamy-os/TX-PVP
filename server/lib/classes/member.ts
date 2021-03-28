@@ -7,6 +7,8 @@ export class Member {
   private cloneId: number
   public constructor(serverId: ServerId, team: Team) {
     this.player = { serverId: serverId, name: GetPlayerName(serverId), identifier: getPlayerIdentifier(serverId) as Identifier, team }
+    console.log(`${GetPlayerName(serverId)} added to ${team}`)
+    emitNet("TXPVP:CORE:setTeam", serverId, team)
   }
     // TODO! testing
   public get coords(): Vector3 {

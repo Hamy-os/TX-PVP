@@ -1,15 +1,17 @@
 import * as Cfx from 'fivem-js';
 import { Loadouts } from "./lib/loadouts";
-import {spawnLocations, setupMapEvents, setupLobbyEvents, Cameras, ClientCallback} from "./lib"
+import {spawnLocations, setupMapEvents, Cameras, ClientCallback, Lobby} from "./lib"
 import { Team } from "./typings";
 /**Init functions */
 
-setupLobbyEvents()
+Lobby.listen()
 setupMapEvents()
 ClientCallback.listen()
 Loadouts.listen()
 
 Cameras.setUpCameraUtils()
+
+setInterval(() => {RestorePlayerStamina(PlayerId(), 1.0)}, 500)
 console.log("Setting up commands")
 RegisterCommand("join", async (source: string, args: string[]) => {
   emit("TXPVP:CORE:spawnPlayerOnLobby", (spawnLocations.get("lobbySpawn")))
@@ -51,3 +53,5 @@ RegisterCommand("warpYankton", (source: string, args: string[]) => {
   emit("TXPVP:CORE:loadNorthYankton")
   Cfx.Game.PlayerPed.Position = spawnLocations.get("northYankton")
 }, true)
+
+

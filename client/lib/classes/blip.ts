@@ -23,10 +23,15 @@ export class Blip {
   public show(): void {
     SetBlipDisplay(this.blipId, 6)
   }
-
   public setDisplay(display: BlipVisibility): void {
     SetBlipDisplay(this.blipId, display)
   }
+
+  public delete(): void {
+    RemoveBlip(this.blipId)
+    this.setDisplay(0)
+  }
+ 
 
   public setColor(color: BlipColor): void {
     SetBlipColour(this.blipId, color)
