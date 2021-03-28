@@ -1,4 +1,4 @@
-import { ClientCallback, Loadouts, castVec3 } from "../";
+import { ClientCallback, Loadouts, castVec3, Notification } from "../";
 import { Team } from "../../typings";
 import * as Cfx from 'fivem-js';
 export class Drones {
@@ -13,11 +13,17 @@ export class Drones {
     const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
     if (result[0] == "DEA") {
       RegisterCommand("openDrone", () => {
-        if (Drones.isDroneOpen) {
-          Drones.closeDrone()
-        } else {
-          Drones.openDrone()
+        if (!IsPedInAnyVehicle(PlayerPedId(), true)) {
+          if (Drones.isDroneOpen) {
+            Drones.closeDrone()
+          } else {
+            Drones.openDrone()
+          }
         }
+        else {
+          Notification.onMap("~r~This action is forbidden while in a vehicle!")
+        }
+        
       }, false)
 
       RegisterCommand("castDronePing", () => {

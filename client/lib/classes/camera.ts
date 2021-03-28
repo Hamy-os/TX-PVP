@@ -1,7 +1,7 @@
 import * as Cfx from 'fivem-js';
 import { Vector3 } from 'fivem-js';
 import { Team } from "../../typings";
-import { cameraLocations, castVec3, castMatrix, Loadouts, ClientCallback } from "../";
+import { cameraLocations, castVec3, castMatrix, Loadouts, ClientCallback, Notification } from "../";
 import { Blip } from "./blip";
 export const Keys = {
 	["ESC"] : 322, ["F1"] : 288, ["F2"] : 289, ["F3"] : 170, ["F5"] : 166, ["F6"] : 167, ["F7"] : 168, ["F8"] : 169, ["F9"] : 56, ["F10"] : 57,
@@ -29,10 +29,14 @@ export class Cameras {
     if (result[0] == "NARCO") {
       RegisterCommand("openCamera", () => {
         if (result[0] == "NARCO") {
-          if (Cameras.cameraActive) {
-            Cameras.CloseCamera()
+          if (!IsPedInAnyVehicle(PlayerPedId(), true)) {
+            if (Cameras.cameraActive) {
+              Cameras.CloseCamera()
+            } else {
+              Cameras.openCamera(Cameras.camIndex || 0)
+            }
           } else {
-            Cameras.openCamera(Cameras.camIndex || 0)
+            Notification.onMap("~r~This action is forbidden while in a vehicle!")
           }
         }
       }, false)
