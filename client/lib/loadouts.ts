@@ -30,7 +30,6 @@ export class Loadouts {
   }
   public static giveLoadoutToPlayer(loadout: string, side: Team): void {
     const ped: number = PlayerPedId()
-    console.log("Giving weapon")
     RemoveAllPedWeapons(ped, false)
     Loadouts.setPlayerModel(Loadouts.loadOuts[side][loadout].outfit)
     Loadouts.loadOuts[side][loadout].items.forEach((weapon: LoadoutWeapon) => {
@@ -44,19 +43,17 @@ export class Loadouts {
   }
   public static setPlayerModel(outfit: OutfitKey): void {
     const components = castPedPedComponent(outfits[outfit])
-    //const model = GetHashKey("mp_m_freemode_01")
-    //RequestModel(model)
-    //const tick = setInterval(() => { if (HasModelLoaded(model)) { clearInterval(tick) } }, 10)
     console.log("Model loaded")
-    //SetPlayerModel(PlayerId(), model)
     const ped = PlayerPedId()
-    SetPedHairColor(ped, 8, 1)
+    ClearAllPedProps(ped)
     components[0].forEach((component: PedComponents) => {
       SetPedComponentVariation(ped, component.comps.compId, component.comps.drawableId, component.comps.textureId, component.comps.paletteId)
     })
     components[1].forEach((component: PedProps) => {
       SetPedPropIndex(ped, component.props.compId, component.props.drawableId, component.props.textureId, true)
     })
+    const color = GetNumHairColors();
+    SetPedHairColor(ped, color, color)
   }
 }
 

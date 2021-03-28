@@ -30,7 +30,6 @@ export function casMatrix(arr: [number[], number[], number[], number[]]): Casted
 }
 
 export function castPedPedComponent(body: RawOutfitDict): [PedComponents[], PedProps[]] {
-    console.log("Casting components")
     const ped = PlayerPedId()
     const result: PedComponents[] = []
     const result2: PedProps[] = []
@@ -55,6 +54,5 @@ export function castPedPedComponent(body: RawOutfitDict): [PedComponents[], PedP
         }
         result2.push(thisProp)
     }
-    console.log("Returning from casting")
     return [result, result2]
 }
