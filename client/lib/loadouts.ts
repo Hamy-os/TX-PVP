@@ -36,6 +36,7 @@ export class Loadouts {
       Loadouts.giveLoadoutToPlayer(loadout, team)
     })
   }
+
   public static async giveLoadoutToPlayer(loadout: string, side: Team): Promise<void> {
     const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
     if (side == result[0]) {
@@ -55,6 +56,7 @@ export class Loadouts {
       console.log("Denined, this team cant assign this loadout")
     }
   }
+  
   public static setPlayerModel(outfit: OutfitKey): void {
     Loadouts.outfit = outfit
     const components = castPedPedComponent(outfits[outfit])

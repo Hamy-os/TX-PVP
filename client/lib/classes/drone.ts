@@ -79,5 +79,6 @@ export class Drones {
   }
   public static ping(): void {
     console.log("Pinging")
+    //TODO! add server-client blip system using the Blip class (client)
   }
 }
