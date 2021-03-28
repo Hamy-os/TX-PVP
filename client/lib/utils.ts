@@ -1,5 +1,5 @@
 import { spawnLocations } from "./";
-import { CastedMatrix, MatrixIndexes } from "./../typings";
+import { CastedMatrix, MatrixIndexes, PedComponents, RawOutfitDict } from "./../typings";
 import * as Cfx from 'fivem-js';
 
 
@@ -27,4 +27,18 @@ export function casMatrix(arr: [number[], number[], number[], number[]]): Casted
             keyedObject[keys[index]] = res
         }) 
          return keyedObject as CastedMatrix
-    }
+}
+
+export function castPedPedComponent(body: RawOutfitDict): PedComponents[] {
+    const ped = PlayerPedId()
+    const result: PedComponents[] = []
+    body.components[0].forEach((id: number, idx: number) => {
+        let thisComp: PedComponents
+        thisComp.compId = idx
+        thisComp.drawableId = id
+        thisComp.textureId = body.components[1][idx]
+        thisComp.paletteId = GetPedPaletteVariation(ped, idx)
+        result.push(thisComp)
+    })
+    return result
+}

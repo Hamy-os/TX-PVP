@@ -7,6 +7,7 @@ import { Team } from "./typings";
 setupLobbyEvents()
 setupMapEvents()
 ClientCallback.listen()
+Loadouts.listen()
 Cameras.setUpCameraUtils()
 console.log("Setting up commands")
 RegisterCommand("join", async (source: string, args: string[]) => {

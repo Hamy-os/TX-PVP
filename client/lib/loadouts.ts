@@ -19,7 +19,7 @@ export class Loadouts {
   }
   public static listen() {
     onNet("TXPVP:CORE:setLoadout", (loadout: string, team: Team) => {
-      giveLoadoutToPlayer(loadout, team)
+      Loadouts.giveLoadoutToPlayer(loadout, team)
     })
   }
   public static giveLoadoutToPlayer(loadout: string, side: Team): void {
@@ -34,9 +34,11 @@ export class Loadouts {
     })
     Cfx.Game.PlayerPed.giveWeapon(Cfx.WeaponHash.Parachute, 9999, false, false) // TODO! needs testing
   }
-
-  public static setPlayerModel(model: string, components: PedComponents[] = []): void {
-    SetPlayerModel(PlayerId(), GetHashKey(model))
+/**
+ * Accepts strings and hashes
+ */
+  public static setPlayerModel(model: string | number, components: PedComponents[] = []): void {
+    SetPlayerModel(PlayerId(), (typeof model == "string") ? GetHashKey(model) : model)
     const ped = PlayerPedId()
     components.forEach((component: PedComponents) => {
       SetPedComponentVariation(ped, component.compId, component.drawableId, component.textureId, component.paletteId)
