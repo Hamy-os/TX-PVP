@@ -24,10 +24,11 @@ export class ClientCallback {
     return new Promise<T>((resolve, reject) => {
       emitNet(`TXPVP:CORE:sv_cb_trigger`, name, args)
       console.log("Triggered callback")
-      onNet(`TXPVP:CORE:sv_cb_receive:${name}`, (...result: unknown[]) => {
+      const cb = (...result: unknown[]) => {
         resolve(result[0] as unknown as T)
-      })
-      removeEventListener(`TXPVP:CORE:sv_cb_receive:${name}`, () => {console.log("")}) // wont run
+      }
+      onNet(`TXPVP:CORE:sv_cb_receive:${name}`, cb)
+      removeEventListener(`TXPVP:CORE:sv_cb_receive:${name}`, cb)
     })
   }
   

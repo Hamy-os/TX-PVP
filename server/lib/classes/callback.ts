@@ -20,10 +20,11 @@ export class ServerCallback {
   public static triggerClientCallback<T>(name: string, target: string, ...args: unknown[]): Promise<T> {
     return new Promise<T>((resolve, reject) => {
       emitNet(`TXPVP:CORE:cl_cb_trigger`, name, target, args)
-      onNet(`TXPVP:CORE:cl_cb_receive:${name}`, (...result: unknown[]) => {
+      const cb = (...result: unknown[]) => {
         resolve(result as unknown as T)
-      })
-      removeEventListener(`TXPVP:CORE:sv_cb_receive:${name}`, () => {console.log("")}) // wont run
+      }
+      onNet(`TXPVP:CORE:cl_cb_receive:${name}`, cb)
+      removeEventListener(`TXPVP:CORE:sv_cb_receive:${name}`, cb)
     })
   }
   
