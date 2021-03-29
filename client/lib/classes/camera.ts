@@ -27,17 +27,18 @@ export class Cameras {
   public static async setUpCameraUtils(): Promise<void> {
     const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
     if (result[0] == "NARCO") {
-      RegisterCommand("openCamera", () => {
+      RegisterCommand("openCamera", async () => {
+        const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
         if (result[0] == "NARCO") {
-          if (!IsPedInAnyVehicle(PlayerPedId(), true)) {
             if (Cameras.cameraActive) {
               Cameras.CloseCamera()
             } else {
+              if (!IsPedInAnyVehicle(PlayerPedId(), true)) {
               Cameras.openCamera(Cameras.camIndex || 0)
+              } else {
+                Notification.onMap("~r~This action is forbidden while in a vehicle!")
+              }
             }
-          } else {
-            Notification.onMap("~r~This action is forbidden while in a vehicle!")
-          }
         }
       }, false)
       

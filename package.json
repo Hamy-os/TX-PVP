@@ -5,7 +5,7 @@
     "author": "shit",
     "license": "MIT",
     "scripts": {
-        "build": "eslint . --ext .ts && tsc /ui && webpack --color --progress",
+        "build": "eslint . --ext .ts && webpack --color --progress",
         "watch": "eslint . --ext .ts && webpack --mode development --watch",
         "lint": "eslint . --ext .ts"
     },

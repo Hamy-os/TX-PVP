@@ -12,16 +12,18 @@ export class Drones {
   public static async setUpDroneUtils(): Promise<void> {
     const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
     if (result[0] == "DEA") {
-      RegisterCommand("openDrone", () => {
-        if (!IsPedInAnyVehicle(PlayerPedId(), true)) {
+      RegisterCommand("openDrone", async () => {
+        const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
+        if (result[0] == "DEA") {
           if (Drones.isDroneOpen) {
             Drones.closeDrone()
           } else {
-            Drones.openDrone()
-          }
-        }
-        else {
-          Notification.onMap("~r~This action is forbidden while in a vehicle!")
+            if (!IsPedInAnyVehicle(PlayerPedId(), true)) {
+              Drones.openDrone()
+            }  else {
+              Notification.onMap("~r~This action is forbidden while in a vehicle!")
+            }
+          } 
         }
         
       }, false)
