@@ -6,13 +6,10 @@ export class ServerCallback {
     onNet("TXPVP:CORE:sv_cb_trigger", async (name: string, ...args: unknown[]) => {
       const src = source
       const fn = this.funcs[name]
-      let result
-      if (fn.constructor.name === "AsyncFunction") {
-        result = await this.funcs[name](src, args)
-      } else {
-        result = this.funcs[name](src, args)
-      }
-      emitNet(`TXPVP:CORE:sv_cb_receive:${name}`, src, result)
+      const possiblePromise = this.funcs[name](src, args);
+      Promise.resolve(possiblePromise).then((ret) => {
+        emitNet(`TXPVP:CORE:sv_cb_receive:${name}`, src, ret)
+          });
     })
   }
 
