@@ -34,17 +34,21 @@ export class Manager {
       if (typeof targets == "object") {
         targets.forEach((idx: ServerId) => {
           if (idx != src) { // prevent dupe blips
-            emitNet("TXPVP:CORE:createBlip", idx, coords, sprite, color, id, visibility, title)
+            emitNet("TXPVP:CORE:createBlip", idx, coords, sprite, color, id, visibility, title.replace("ply_name ", GetPlayerName(src)))
           }
         })
       } else {
         const teams = getTeams()[targets]
         for (const [k, v] of Object.entries(teams)) {
           if (k != src) {
-            emitNet("TXPVP:CORE:createBlip", k, coords, sprite, color, id, visibility, title)
+            emitNet("TXPVP:CORE:createBlip", k, coords, sprite, color, id, visibility, title.replace("ply_name ", GetPlayerName(src)))
           }
         }
       }
+    })
+
+    onNet("TXPVP:CORE:removeGlobalBlip", (key: string) => {
+      emitNet("TXPVP:CORE:removeBlip", -1, key)
     })
   }
 }

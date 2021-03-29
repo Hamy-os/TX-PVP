@@ -4,12 +4,17 @@ import { castVec3 } from "../";
 
 export class Blip {
   private readonly blipId: BlipId
-  private static blips: { [key: string]: number } = {}
+  private static blips: { [key: string]: Blip } = {}
   private readonly blipKey: string
   private readonly blipTitle: string
   public static listen(): void {
     onNet("TXPVP:CORE:createBlip", (coords: number[], sprite: BlipSprite, color: BlipColor, id: string, visibility: BlipVisibility, title: string) => {
       new Blip(castVec3(coords), sprite, color, id, visibility, title)
+    })
+    onNet("TXPVP:CORE:removeBlip", (key: string) => {
+      if (Blip.blips[key]) {
+        Blip.blips[key].delete()
+      }
     })
   }
 
@@ -22,9 +27,9 @@ export class Blip {
       AddTextComponentString(title)
     EndTextCommandSetBlipName(this.blipId)
     this.blipTitle = title
-    blipUtil(this.blipId)
-    Blip.blips[id] = this.blipId
+    if (blipUtil) blipUtil(this.blipId)
     this.blipKey = id 
+    Blip.blips[id] = this
   }
   public hide(): void {
     SetBlipDisplay(this.blipId, 0)
@@ -41,7 +46,9 @@ export class Blip {
     RemoveBlip(this.blipId)
     this.setDisplay(0)
   }
-
+  public globalDelete(): void {
+    emitNet("removeGlobalBlip", this.blipKey)
+  }
 
   public setColor(color: BlipColor): void {
     SetBlipColour(this.blipId, color)
@@ -57,7 +64,7 @@ export class Blip {
   public get id(): BlipId {
     return this.blipId
   }
-  public globalize(targets: ServerId[] | Team): void {
-    emitNet("TXPVP:CORE:globalizeBlip", targets, GetBlipCoords(this.blipId), GetBlipSprite(this.blipId), GetBlipColour(this.blipId), this.blipKey, GetBlipInfoIdDisplay(this.blipId), this.blipTitle)
-  } 
+  public globalize(targets: ServerId[] | Team, title?: string): void {
+    emitNet("TXPVP:CORE:globalizeBlip", targets, GetBlipCoords(this.blipId), GetBlipSprite(this.blipId), GetBlipColour(this.blipId), this.blipKey, GetBlipInfoIdDisplay(this.blipId), title || this.blipTitle)
+  }
 }

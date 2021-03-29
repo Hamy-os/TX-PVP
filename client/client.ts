@@ -1,6 +1,6 @@
 import * as Cfx from 'fivem-js';
 import { Loadouts } from "./lib/loadouts";
-import {spawnLocations, setupMapEvents, Cameras, Drones, ClientCallback, Lobby, Blip} from "./lib"
+import {spawnLocations, setupMapEvents, Cameras, Drones, ClientCallback, Lobby, Blip, Pinger} from "./lib"
 import { Team } from "./typings";
 /**Init functions */
 
@@ -29,7 +29,9 @@ RegisterCommand('car', async (source: number, args: string[]) => {
   const vehicle = await Cfx.World.createVehicle(new Cfx.Model(args[0]), Cfx.Game.PlayerPed.Position, Cfx.Game.PlayerPed.Heading);
   Cfx.Game.PlayerPed.setIntoVehicle(vehicle, Cfx.VehicleSeat.Driver);
 }, true);
-
+RegisterCommand("ping", () => {
+  Pinger.castPing()
+}, false)
 
 
 RegisterCommand("tp", (source: string, args: string[]) => {
