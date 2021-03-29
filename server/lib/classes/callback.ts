@@ -26,7 +26,7 @@ export class ServerCallback {
       onNet(`TXPVP:CORE:cl_cb_receive:${name}`, (...result: unknown[]) => {
         resolve(result as unknown as T)
       })
-
+      removeEventListener(`TXPVP:CORE:sv_cb_receive:${name}`, () => {console.log("")}) // wont run
     })
   }
   
