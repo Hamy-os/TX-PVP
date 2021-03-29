@@ -35,6 +35,8 @@ export class Member {
     return this.cloneId
   }
   public deleteClone(): void {
-    DeleteEntity(this.cloneId)
+    try {
+      DeleteEntity(this.cloneId)
+    } catch(err) {console.log("Failed to delete player clome, its probably already deleted")}
   }
 }

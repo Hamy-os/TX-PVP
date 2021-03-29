@@ -12,10 +12,10 @@ export class Loadouts {
       },
       "rusher": {
         outfit: "military_2", items: [{ name: "weapon_pistol50", ammoCount: 100, addons: [] }, {name: "weapon_pumpshotgun_mk2", ammoCount: 100, addons: ["COMPONENT_AT_SIGHTS", "COMPONENT_AT_MUZZLE_08"]},
-        { name: "weapon_assaultsmg", ammoCount: 200, addons: [] }, { name: "weapon_smokegrenade", ammoCount: 6, addons: [] }, { name: "weapon_flashlight", ammoCount: 1, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }]
+        { name: "weapon_assaultsmg", ammoCount: 200, addons: ["COMPONENT_AT_SCOPE_MACRO"] }, { name: "weapon_smokegrenade", ammoCount: 6, addons: [] }, { name: "weapon_flashlight", ammoCount: 1, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }]
       },
       "stealth": {
-        outfit: "military_3", items: [{ name: "weapon_militaryrifle", ammoCount: 200, addons: ["COMPONENT_AT_AR_SUPP"] },
+        outfit: "military_3", items: [{ name: "weapon_militaryrifle", ammoCount: 200, addons: ["COMPONENT_AT_AR_SUPP", "COMPONENT_AT_SCOPE_SMALL"] },
         { name: "weapon_proxmine", ammoCount: 20, addons: [] }, { name: "weapon_knife", ammoCount: 1, addons: [] }, { name: "WEAPON_COMBATPISTOL", ammoCount: 250, addons: ["COMPONENT_AT_PI_SUPP"] }]
       },
       "kaboom": {
