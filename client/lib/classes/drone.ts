@@ -47,6 +47,7 @@ export class Drones {
     emitNet("TXPVP:CORE:ClonePlayer", Drones.coords, Loadouts.model)
     const droneId = await ClientCallback.triggerServerCallback<number>("createDrone")
     Drones.tick = setTick(() => { DisableControlAction(2, 75, true) })
+
     Drones.interval = setInterval(() => {
       const localId = GetVehiclePedIsIn(ped, false)
       const health = GetEntityHealth(localId) / 10
@@ -59,6 +60,7 @@ export class Drones {
       }))
       if (health <= 20) {
         Drones.closeDrone()
+        clearInterval(Drones.interval)
       }
     }, 30)
     Drones.currDrone = droneId
