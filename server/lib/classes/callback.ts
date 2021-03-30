@@ -12,7 +12,6 @@ export class ServerCallback {
         emitNet(`TXPVP:CORE:sv_cb_receive:${name}`, src, ret)
       } else {
         const ret = fn
-        console.log("Returning", fn)
         emitNet(`TXPVP:CORE:sv_cb_receive:${name}`, src, ret)
       }
 

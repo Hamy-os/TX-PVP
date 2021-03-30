@@ -2,6 +2,7 @@ import * as Cfx from 'fivem-js';
 
 export function setupMapEvents() { // if the event called without args it wont tp the player
   onNet("TXPVP:CORE:loadIsland", (coords: Cfx.Vector3) => {
+    RequestModel(GetHashKey("rcmavic"))
     console.log("Received event")
     emit("TXPVP:CORE:unloadNorthYankton")
     Citizen.invokeNative('0x9A9D1BA639675CF1', "HeistIsland", true)
