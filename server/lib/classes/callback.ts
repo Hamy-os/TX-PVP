@@ -5,11 +5,17 @@ export class ServerCallback {
     console.log("Listening for callbacks")
     onNet("TXPVP:CORE:sv_cb_trigger", async (name: string, ...args: unknown[]) => {
       const src = source
-      const fn = this.funcs[name]
-      const possiblePromise = this.funcs[name](src, args);
-      Promise.resolve(possiblePromise).then((ret) => {
+      const fn = this.funcs[name](src, args)
+      const isPromise = fn instanceof Promise
+      if (isPromise) {
+        const ret = await fn
         emitNet(`TXPVP:CORE:sv_cb_receive:${name}`, src, ret)
-          });
+      } else {
+        const ret = fn
+        console.log("Returning", fn)
+        emitNet(`TXPVP:CORE:sv_cb_receive:${name}`, src, ret)
+      }
+
     })
   }
 
@@ -22,9 +28,9 @@ export class ServerCallback {
       emitNet(`TXPVP:CORE:cl_cb_trigger`, name, target, args)
       const cb = (...result: unknown[]) => {
         resolve(result as unknown as T)
+        removeEventListener(`TXPVP:CORE:sv_cb_receive:${name}`, cb)
       }
       onNet(`TXPVP:CORE:cl_cb_receive:${name}`, cb)
-      removeEventListener(`TXPVP:CORE:sv_cb_receive:${name}`, cb)
     })
   }
   
