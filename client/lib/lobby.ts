@@ -1,6 +1,6 @@
 import * as Cfx from 'fivem-js';
 import { spawnLocations } from "./coords";
-import { Cameras, Drones } from "./";
+import { Cameras, Drones, Alarm } from "./";
 import { Team } from "../typings";
 const playerCount = 0;
 
@@ -19,9 +19,12 @@ export class Lobby {
             if (team == "NARCO") {
                 Cameras.setUpCameraUtils()
                 Cameras.showBlips()
+                Alarm.stopDistanceChecker()
             } else {
                 Drones.setUpDroneUtils()
                 Cameras.hideBlips()
+                //TODO! move this to a better location so it starts only when an alarm is placed = less overhead
+                Alarm.startDistanceChecker()
             }
         })
     }

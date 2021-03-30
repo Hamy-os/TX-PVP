@@ -64,7 +64,7 @@ export class Blip {
   public get id(): BlipId {
     return this.blipId
   }
-  public globalize(targets: ServerId[] | Team, title?: string): void {
-    emitNet("TXPVP:CORE:globalizeBlip", targets, GetBlipCoords(this.blipId), GetBlipSprite(this.blipId), GetBlipColour(this.blipId), this.blipKey, GetBlipInfoIdDisplay(this.blipId), title || this.blipTitle)
+  public globalize(targets: ServerId[] | Team, title?: string, replace = true): void {
+    emitNet("TXPVP:CORE:globalizeBlip", targets, GetBlipCoords(this.blipId), GetBlipSprite(this.blipId), GetBlipColour(this.blipId), this.blipKey, GetBlipInfoIdDisplay(this.blipId), title || this.blipTitle, replace)
   }
 }

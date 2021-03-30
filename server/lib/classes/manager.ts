@@ -3,6 +3,7 @@ import { ServerId, Team } from "../../typings";
 export class Manager {
   private static droneModel = GetHashKey("rcmavic")
   private static currDrones: { [key: string]: number } = {}
+  private static alarms: number[] = []
   public static listen(): void {
     ServerCallback.registerCallback("createDrone", async (src: string) => {
       return new Promise((resolve, reject) => {
@@ -19,6 +20,7 @@ export class Manager {
       }, 200) 
       })
     })
+
     onNet("TXPVP:CORE:DeleteDrone", () => {
       const src = source
       if (Manager.currDrones[src]) {
@@ -29,19 +31,21 @@ export class Manager {
         console.log("Hm weird")
       }
     })
-    onNet("TXPVP:CORE:globalizeBlip", (targets: ServerId[] | Team, coords: number[], sprite: number, color: number, id: string, visibility: number, title: string) => {
+
+    onNet("TXPVP:CORE:globalizeBlip", (targets: ServerId[] | Team, coords: number[], sprite: number, color: number, id: string, visibility: number, title: string, replace = true) => {
       const src = source
+      const ttl = replace ? title.replace("ply_name ", GetPlayerName(src)) : title 
       if (typeof targets == "object") {
         targets.forEach((idx: ServerId) => {
           if (idx != src) { // prevent dupe blips
-            emitNet("TXPVP:CORE:createBlip", idx, coords, sprite, color, id, visibility, title.replace("ply_name ", GetPlayerName(src)))
+            emitNet("TXPVP:CORE:createBlip", idx, coords, sprite, color, id, visibility, ttl)
           }
         })
       } else {
         const teams = getTeams()[targets]
         for (const [k, v] of Object.entries(teams)) {
           if (k != src) {
-            emitNet("TXPVP:CORE:createBlip", k, coords, sprite, color, id, visibility, title.replace("ply_name ", GetPlayerName(src)))
+            emitNet("TXPVP:CORE:createBlip", k, coords, sprite, color, id, visibility, ttl)
           }
         }
       }
@@ -49,6 +53,12 @@ export class Manager {
 
     onNet("TXPVP:CORE:removeGlobalBlip", (key: string) => {
       emitNet("TXPVP:CORE:removeBlip", -1, key)
+    })
+
+    onNet("TXPVP:ALARM:action:triggerMotionAlarm", (index: number) => {
+      const src = source
+      console.log("Alarm trigger")
+      emitNet("TXPVP:ALARM:action:triggered", -1, index, src)
     })
   }
 }

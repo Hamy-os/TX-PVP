@@ -10,4 +10,5 @@ export * from "./classes/drone"
 export * from "./classes/callback"
 export * from "./classes/notifications"
 export * from "./classes/pinger"
+export * from "./classes/alarm"
 export * from "./json";
