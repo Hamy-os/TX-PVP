@@ -31,3 +31,7 @@ export interface AlarmRegistry {
   placedBy: ServerId,
   name: string
 }
+
+export interface SpawnPoint {
+  spawns: { pos: Cfx.Vector3, rot: number }[], name: string, vehicle?: string, hook?: (vehId: number) => void
+}
