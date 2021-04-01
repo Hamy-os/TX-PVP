@@ -5,7 +5,7 @@ export class Manager {
   private static currDrones: { [key: string]: number } = {}
   private static alarms: number[] = []
   public static listen(): void {
-    ServerCallback.registerCallback("createDrone", async (src: string) => {
+    ServerCallback.registerCallback<number>("createDrone", async (src: string) => {
       return new Promise((resolve, reject) => {
         const entity = GetPlayerPed(src)
         const coords = GetEntityCoords(entity)

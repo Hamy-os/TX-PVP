@@ -12,3 +12,5 @@ export * from "./classes/notifications"
 export * from "./classes/pinger"
 export * from "./classes/alarm"
 export * from "./json";
+export * from "./spawnpoints/dea"
+export * from "./spawnpoints/narco"

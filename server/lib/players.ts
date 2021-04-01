@@ -40,7 +40,7 @@ export function setUpEvents() {
     players[idMapped[src]][src].deleteClone()
   })
 
-  ServerCallback.registerCallback("getPlayerTeam", (src: string) => {
+  ServerCallback.registerCallback<string[]>("getPlayerTeam", (src: string) => {
         return [(idMapped[src] || "NONE"), GetPlayerName(src)]
   })
 } 
