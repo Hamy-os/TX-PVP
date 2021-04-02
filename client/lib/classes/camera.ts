@@ -81,7 +81,6 @@ export class Cameras {
     SetTimecycleModifierStrength(2.0)
     SetFocusArea(cameraLocations[index].coords.x, cameraLocations[index].coords.y, cameraLocations[index].coords.z, cameraLocations[index].coords.x, cameraLocations[index].coords.y, cameraLocations[index].coords.z)
     FreezeEntityPosition(PlayerPedId(), true)
-    DisplayRadar(false)
     this.cameraActive = true
     setTimeout(() => { DoScreenFadeIn(500),  SendNuiMessage(JSON.stringify({
       type: "cameraVisible",
@@ -111,7 +110,6 @@ export class Cameras {
     this.createdCamera = 0
     SetFocusEntity(PlayerPedId())
     FreezeEntityPosition(PlayerPedId(), false)
-    DisplayRadar(true)
     clearTick(Cameras.scaleformTick)
     this.cameraActive = false
     setTimeout(() => { DoScreenFadeIn(500);   SendNuiMessage(JSON.stringify({
