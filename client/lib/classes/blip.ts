@@ -43,8 +43,8 @@ export class Blip {
   }
 
   public delete(): void {
-    RemoveBlip(this.blipId)
     this.setDisplay(0)
+    RemoveBlip(this.blipId)
   }
   public globalDelete(): void {
     emitNet("removeGlobalBlip", this.blipKey)

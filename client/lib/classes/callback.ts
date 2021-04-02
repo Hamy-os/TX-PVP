@@ -1,7 +1,6 @@
 import { ClientCallbackFn } from "../../typings";
 export class ClientCallback {
   private static funcs: Map<string, ClientCallbackFn> = new Map()
-  private static results: {[key: string]: unknown} = {}
   public static listen() {
     console.log("Listening for callbacks")
     onNet("TXPVP:CORE:cl_cb_trigger", async (name: string, ...args: unknown[]) => {
