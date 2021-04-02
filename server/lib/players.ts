@@ -39,7 +39,14 @@ export function setUpEvents() {
     const src = source
     players[idMapped[src]][src].deleteClone()
   })
-
+  onNet("TXPVP:CORE:MaskPlayer", () => {
+    const src = source
+    SetEntityRoutingBucket(GetPlayerPed(src), 1)
+  })
+  onNet("TXPVP:CORE:UnMaskPlayer", () => {
+    const src = source
+    SetEntityRoutingBucket(GetPlayerPed(src), 0)
+  })
   ServerCallback.registerCallback<string[]>("getPlayerTeam", (src: string) => {
         return [(idMapped[src] || "NONE"), GetPlayerName(src)]
   })
