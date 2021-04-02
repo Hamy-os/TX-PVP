@@ -1,5 +1,3 @@
-Welcome file
-Welcome file
 # Welcome to the TX-PVP Source code!
 here you can find the code used on [tx-pvp](https://servers.fivem.net/servers/detail/kperkd)
 if you wish to contribue that would be greatly appreciated!
