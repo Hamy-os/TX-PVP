@@ -1,7 +1,7 @@
 import * as Cfx from 'fivem-js';
 import { Vector3 } from 'fivem-js';
 import { Team } from "../../typings";
-import { cameraLocations, castVec3, castMatrix, Loadouts, ClientCallback, Notification } from "../";
+import { cameraLocations, castVec3, castMatrix, Loadouts, ClientCallback, Ui } from "../";
 import { Blip } from "./blip";
 export const Keys = {
 	["ESC"] : 322, ["F1"] : 288, ["F2"] : 289, ["F3"] : 170, ["F5"] : 166, ["F6"] : 167, ["F7"] : 168, ["F8"] : 169, ["F9"] : 56, ["F10"] : 57,
@@ -36,7 +36,7 @@ export class Cameras {
               if (!IsPedInAnyVehicle(PlayerPedId(), true)) {
               Cameras.openCamera(Cameras.camIndex || 0)
               } else {
-                Notification.onMap("~r~This action is forbidden while in a vehicle!")
+                Ui.Notification.onMap("~r~This action is forbidden while in a vehicle!")
               }
             }
         }
@@ -75,7 +75,7 @@ export class Cameras {
     Cameras.coords = GetEntityCoords(ped, false)
     //Cameras.clonedPed = ClonePed(ped, GetEntityHeading(ped), true, true)
     this.ChangeCamera(index)
-    const instructions = await Cameras.CreateInstructionScaleform("instructional_buttons")
+    const instructions = await Ui.Scaleform.CreateInstructionScaleformForCamera("instructional_buttons")
     Cameras.scaleformTick = setTick(() => { DrawScaleformMovieFullscreen(instructions, 255, 255, 255, 255, 0), Cameras.rotate()})
     SetTimecycleModifier("scanline_cam_cheap")
     SetTimecycleModifierStrength(2.0)
@@ -189,73 +189,4 @@ export class Cameras {
     SetEntityAlpha(ped, 0, 0)
     SetEntityCoords(ped, cameraLocations[index].coords.x, cameraLocations[index].coords.y, cameraLocations[index].coords.z, false, false, false, false)
   }
-  
-  private static InstructionButton(ControlButton: string): void {
-    N_0xe83a3e3557a56640(ControlButton)
-  }
-  
-  
-  private static InstructionButtonMessage(text: string): void {
-    BeginTextCommandScaleformString("STRING")
-    AddTextComponentScaleform(text)
-    EndTextCommandScaleformString()
-  }
-    
-  private static async loadScaleForm(scaleform: number): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      const interval = setInterval(() => { if (HasScaleformMovieLoaded(scaleform)) { resolve(); clearInterval(interval) }}, 10)
-    })
-    }
-  private static async CreateInstructionScaleform(scf: string): Promise<number> {
-    return new Promise<number>((resolve, reject) => {
-      const scaleform = RequestScaleformMovie(scf)
-      Cameras.loadScaleForm(scaleform).then(() => {
-        PushScaleformMovieFunction(scaleform, "CLEAR_ALL")
-        PopScaleformMovieFunctionVoid()
-        
-        PushScaleformMovieFunction(scaleform, "SET_CLEAR_SPACE")
-        PushScaleformMovieFunctionParameterInt(200)
-        PopScaleformMovieFunctionVoid()
-      
-        PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
-        PushScaleformMovieFunctionParameterInt(0)
-        this.InstructionButton(GetControlInstructionalButton(1, 38, 1))
-        this.InstructionButtonMessage("Next camera")
-        PopScaleformMovieFunctionVoid()
-
-        PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
-        PushScaleformMovieFunctionParameterInt(1)
-        this.InstructionButton(GetControlInstructionalButton(1, 44, 1))
-        this.InstructionButtonMessage("Previous camera")
-        PopScaleformMovieFunctionVoid()
-
-        PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
-        PushScaleformMovieFunctionParameterInt(2)
-        this.InstructionButton(GetControlInstructionalButton(1, 29, 1))
-        this.InstructionButtonMessage("Close camera")
-        PopScaleformMovieFunctionVoid()
-
-        PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
-        PushScaleformMovieFunctionParameterInt(3)
-        this.InstructionButton(GetControlInstructionalButton(1, 249, 1))
-        this.InstructionButtonMessage("Toggle night vision")
-        PopScaleformMovieFunctionVoid()
-      
-      
-      
-        PushScaleformMovieFunction(scaleform, "DRAW_INSTRUCTIONAL_BUTTONS")
-        PopScaleformMovieFunctionVoid()
-      
-        PushScaleformMovieFunction(scaleform, "SET_BACKGROUND_COLOUR")
-        PushScaleformMovieFunctionParameterInt(0)
-        PushScaleformMovieFunctionParameterInt(0)
-        PushScaleformMovieFunctionParameterInt(0)
-        PushScaleformMovieFunctionParameterInt(80)
-        PopScaleformMovieFunctionVoid()
-      
-        resolve(scaleform)
-      })
-    })
-  }
- 
 }

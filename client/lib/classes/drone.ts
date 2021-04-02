@@ -1,4 +1,4 @@
-import { ClientCallback, Loadouts, castVec3, Notification } from "../";
+import { ClientCallback, Loadouts, castVec3, Ui } from "../";
 import { Team } from "../../typings";
 import * as Cfx from 'fivem-js';
 export class Drones {
@@ -21,7 +21,7 @@ export class Drones {
             if (!IsPedInAnyVehicle(PlayerPedId(), true)) {
               Drones.openDrone()
             }  else {
-              Notification.onMap("~r~This action is forbidden while in a vehicle!")
+              Ui.Notification.onMap("~r~This action is forbidden while in a vehicle!")
             }
           } 
         }

@@ -1,4 +1,4 @@
-import { Blip, castVec3, ClientCallback, Notification } from "../";
+import { Blip, castVec3, ClientCallback, Ui } from "../";
 import { BlipId, Team } from "../../typings";
 export class Pinger {
   private static ping: Blip
@@ -11,6 +11,6 @@ export class Pinger {
     const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
     Pinger.ping.globalize(result[0] as Team, customName || `ply_name 's ping`, rename)
     if (hideIt) Pinger.ping.hide() // hide it so the user wont see his own ping
-    Notification.onMap("~g~Pinged location!")
+    Ui.Notification.onMap("~g~Pinged location!")
   }
 }
