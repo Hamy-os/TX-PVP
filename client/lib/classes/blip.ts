@@ -13,6 +13,7 @@ export class Blip {
     })
     onNet("TXPVP:CORE:removeBlip", (key: string) => {
       if (Blip.blips[key]) {
+        console.log(`Removing blip with key: ${key}`)
         Blip.blips[key].delete()
       }
     })
