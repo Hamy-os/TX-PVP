@@ -2,15 +2,16 @@
 
 export class Ui {
   protected static textEntries: string[] = [];
+
   public static Notification = class {
-    public static onMap(text: string): void {
+    public static onMap(text: string, important=true, saveIntoBrief=false): void {
       if (!Ui.textEntries.includes(text)) {
         AddTextEntry(text, text)
         Ui.textEntries.push(text)
       }
       SetNotificationTextEntry(text)
       AddTextComponentString(text)
-      DrawNotification(true, false)
+      DrawNotification(important, saveIntoBrief)
     }
   }
 
@@ -31,7 +32,6 @@ export class Ui {
         const interval = setInterval(() => { if (HasScaleformMovieLoaded(scaleform)) { resolve(); clearInterval(interval) }}, 10)
       })
     }
-
     public static async CreateInstructionScaleformForCamera(scf: string): Promise<number> {
       return new Promise<number>((resolve, reject) => {
         const scaleform = RequestScaleformMovie(scf)
