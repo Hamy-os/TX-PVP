@@ -35,3 +35,5 @@ export interface AlarmRegistry {
 export interface SpawnPoint {
   spawns: { pos: Cfx.Vector3, rot: number }[], name: string, vehicle?: string, hook?: (vehId: number) => void
 }
+
+export type ClientCallbackFn = (...args: unknown[]) => Promise<unknown> | unknown 

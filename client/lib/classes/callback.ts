@@ -1,11 +1,12 @@
+import { ClientCallbackFn } from "../../typings";
 export class ClientCallback {
-  private static funcs: { [key: string]: (...args: unknown[]) => Promise<unknown> | unknown } = {}
+  private static funcs: Map<string, ClientCallbackFn> = new Map()
   private static results: {[key: string]: unknown} = {}
   public static listen() {
     console.log("Listening for callbacks")
     onNet("TXPVP:CORE:cl_cb_trigger", async (name: string, ...args: unknown[]) => {
       const src = source
-      const fn = this.funcs[name](args)
+      const fn = this.funcs.get(name)(args)
       const isPromise = fn instanceof Promise
       if (isPromise) {
         const result = await fn
@@ -18,7 +19,7 @@ export class ClientCallback {
   }
 
   public static registerCallback<T>(name: string, fn: (...args: unknown[]) => Promise<T> | T): void {
-    this.funcs[name] = fn
+    this.funcs.set(name, fn)
   }
   
   public static triggerServerCallback<T>(name: string,  ...args: unknown[]): Promise<T> {

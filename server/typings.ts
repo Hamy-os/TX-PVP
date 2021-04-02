@@ -30,3 +30,5 @@ export interface RawOutfitDict  {
       number[]
 ]
 }
+
+export type ServerCallbackFn = (src: string, ...args: unknown[]) => Promise<unknown> | unknown
