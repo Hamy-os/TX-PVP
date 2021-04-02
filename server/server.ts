@@ -9,7 +9,7 @@ async function main() {
     const src = source
     console.log("Adding player to team", src, args[0])
     addPlayerToTeam(src, args[0] as Team)
-  }, true)
+  }, false)
 }
 
 main()

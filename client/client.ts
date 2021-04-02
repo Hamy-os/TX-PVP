@@ -23,7 +23,7 @@ RegisterCommand("join", async (source: string, args: string[]) => {
 RegisterCommand("team", async (source: string, args: string[]) => {
   const result = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
   console.log(result)
-}, true)
+}, false)
 
 RegisterCommand('car', async (source: number, args: string[]) => {
   const vehicle = await Cfx.World.createVehicle(new Cfx.Model(args[0]), Cfx.Game.PlayerPed.Position, Cfx.Game.PlayerPed.Heading);
@@ -36,25 +36,25 @@ RegisterCommand("ping", () => {
 
 RegisterCommand("tp", (source: string, args: string[]) => {
   Cfx.Game.PlayerPed.Position = spawnLocations.get(args[0]) || spawnLocations.get("airField")
-}, true)
+}, false)
 
 
 
 
  
-RegisterCommand("getLoadout", (source: string, args: string[]) => {
+RegisterCommand("loadout", (source: string, args: string[]) => {
   console.log("Command triggered")
   Loadouts.giveLoadoutToPlayer(args[0], args[1] as Team)
-}, true)
+}, false)
 
-RegisterCommand("warpIsland", (source: string, args: string[]) => {
+RegisterCommand("cayo", (source: string, args: string[]) => {
   emit("TXPVP:CORE:loadIsland")
   Cfx.Game.PlayerPed.Position = spawnLocations.get(args[0]) || spawnLocations.get("airField")
-}, true)
+}, false)
 
-RegisterCommand("warpYankton", (source: string, args: string[]) => {
+RegisterCommand("yankton", (source: string, args: string[]) => {
   emit("TXPVP:CORE:loadNorthYankton")
   Cfx.Game.PlayerPed.Position = spawnLocations.get("northYankton")
-}, true)
+}, false)
 
 
