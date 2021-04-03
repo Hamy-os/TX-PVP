@@ -1,7 +1,7 @@
-import {Defferals} from "../../typings"
+import {IDeferrals} from "../../typings"
 export class Deferrals {
   public static listen(): void {
-    on("playerConnecting", (name: string, setKickReason: (res: string) => void, deferrals: Defferals) => {
+    on("playerConnecting", (name: string, setKickReason: (res: string) => void, deferrals: IDeferrals) => {
       deferrals.defer()
       setTimeout(() => {
         console.log("Sending defferal")

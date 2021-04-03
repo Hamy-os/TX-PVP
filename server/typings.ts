@@ -32,7 +32,7 @@ export interface RawOutfitDict  {
 }
 
 export type ServerCallbackFn = (src: string, ...args: unknown[]) => Promise<unknown> | unknown
-export interface Defferals {
+export interface IDeferrals  {
   /**
    *  Initializes deferrals for the current resource. It is required to wait for at least a tick after calling defer before calling any other function.
 
