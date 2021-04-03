@@ -22,7 +22,7 @@ export class ClientCallback {
     })
   }
 
-  public static registerCallback<T>(name: string, fn: (...args: unknown[]) => Promise<T> | T): void {
+  public static registerCallback<T>(name: string, fn: ClientCallbackFn): void {
     this.funcs.set(name, fn)
   }
   

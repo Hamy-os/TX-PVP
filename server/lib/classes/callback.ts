@@ -25,7 +25,7 @@ export class ServerCallback {
     })
   }
 
-  public static registerCallback<T>(name: string, fn: (src: string, ...args: unknown[]) => Promise<T> | T): void {
+  public static registerCallback<T>(name: string, fn: ServerCallbackFn): void {
     this.funcs.set(name, fn)
   }
   
