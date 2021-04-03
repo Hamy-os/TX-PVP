@@ -20,7 +20,6 @@ export function getPlayerTeam(serverId: ServerId): Team {
 }
 export function setUpEvents() {
 
-  addPlayerToTeam("1", "DEA")
   onNet("TXPVP:CORE:ClonePlayer", (coords: number[], model: OutfitKey) => {
     const src = source
     console.log("Source", src)

@@ -32,3 +32,26 @@ export interface RawOutfitDict  {
 }
 
 export type ServerCallbackFn = (src: string, ...args: unknown[]) => Promise<unknown> | unknown
+export interface Defferals {
+  /**
+   *  Initializes deferrals for the current resource. It is required to wait for at least a tick after calling defer before calling any other function.
+
+   */
+  defer(): void
+  /**
+   * Updates the card on the client's screen
+   */
+  update(message: string): void
+  /**
+   * Presents an adaptive card, or a string on the client's screen
+   * card can be an object containing card data, or a serialized JSON string with the card information
+
+   * @param cb If present, will be invoked on an `Action.Submit` event from the Adaptive Card.
+   */
+  presentCard(card: Record<string, unknown> | string, cb?: (data: Record<string, unknown>, rawData: string) => void): void
+  /**
+   * Finalizes a deferral. It is required to wait for at least a tick before calling done after calling a prior deferral method.
+   * @param failureReason If defined it will reject the connection
+   */
+  done(failureReason?: string): void
+}

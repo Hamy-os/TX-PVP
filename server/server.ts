@@ -1,9 +1,10 @@
-import { setUpEvents, ServerCallback, addPlayerToTeam, Manager } from "./lib";
+import { setUpEvents, ServerCallback, addPlayerToTeam, Manager, Deferrals } from "./lib";
 import {Team} from "./typings"
 async function main() {
   setUpEvents()
   ServerCallback.listen()
   Manager.listen()
+  Deferrals.listen()
   console.log("Running")
 
   //Join a team usage: /jointeam Name
