@@ -1,6 +1,6 @@
 import * as Cfx from 'fivem-js';
 import { AlarmRegistry, ServerId, Team } from "../../typings";
-import { castVec3, ClientCallback, Notification } from "../";
+import { castVec3, ClientCallback, Ui } from "../";
 
 // event TXPVP:ALARM:action:triggerMotionAlarm
 export class Alarm {
@@ -30,9 +30,9 @@ export class Alarm {
         const resp: [Team, string] = await ClientCallback.triggerServerCallback<[Team, string]>("getPlayerTeam")
         const team = resp[0]
         if (team == "NARCO") {
-          Notification.onMap(`~g~Your motion detector "${Alarm.alarms[index].name} has been triggered!`)
+          Ui.Notification.onMap(`~g~Your motion detector "${Alarm.alarms[index].name} has been triggered!`)
         } else if (team == "DEA" ) {
-          Notification.onMap(`~r~${GetPlayerName(by)} triggered a motion alarm!`)
+          Ui.Notification.onMap(`~r~${GetPlayerName(by)} triggered a motion alarm!`)
         }
       }
     })

@@ -3,7 +3,7 @@ import { ServerCallbackFn } from "../../typings";
 export class ServerCallback {
   private static funcs: Map<string, ServerCallbackFn> = new Map()
   
-  public static listen() {
+  public static listen(): void {
     console.log("Listening for callbacks")
     onNet("TXPVP:CORE:sv_cb_trigger", async (name: string, ...args: unknown[]) => {
       const src = source
