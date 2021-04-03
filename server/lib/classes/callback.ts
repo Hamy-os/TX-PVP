@@ -21,7 +21,6 @@ export class ServerCallback {
         throw err
       }
       
-
     })
   }
 

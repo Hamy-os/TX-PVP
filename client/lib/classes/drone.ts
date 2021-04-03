@@ -44,7 +44,7 @@ export class Drones {
     SetTimecycleModifier("scanline_cam_cheap")
     SetTimecycleModifierStrength(1.0)
     Drones.coords = GetEntityCoords(ped, false)
-    emitNet("TXPVP:CORE:ClonePlayer", Drones.coords, Loadouts.model)
+   // emitNet("TXPVP:CORE:ClonePlayer", Drones.coords, Loadouts.model)
     const droneId = await ClientCallback.triggerServerCallback<number>("createDrone")
     Drones.tick = setTick(() => { DisableControlAction(2, 75, true) })
 
@@ -72,7 +72,7 @@ export class Drones {
   }
   public static closeDrone(): void {
     DoScreenFadeOut(50)
-    emitNet("TXPVP:CORE:DeleteClone")
+    //emitNet("TXPVP:CORE:DeleteClone")
     emitNet("TXPVP:CORE:DeleteDrone")
     const ped = PlayerPedId()
     SetEntityInvincible(ped, false)
