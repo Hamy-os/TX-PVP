@@ -17,7 +17,7 @@ console.log("Setting up commands")
 
 // join command for lobby
 RegisterCommand("join", async (source: string, args: string[]) => {
-  emit("TXPVP:CORE:spawnPlayerOnLobby", (spawnLocations.get("lobbyspawn")))
+  emit("TXPVP:CORE:spawnPlayerOnLobby", (spawnLocations.get("lobbySpawn")))
   Loadouts.giveLoadoutToPlayer("basic", "NARCO")
 }, false);
 
@@ -48,7 +48,7 @@ RegisterCommand("ping", () => {
 
 // tp command usage: /tp location
 RegisterCommand("tp", (source: string, args: string[]) => {
-  Cfx.Game.PlayerPed.Position = spawnLocations.get(args[0]) || spawnLocations.get("airfield")
+  Cfx.Game.PlayerPed.Position = spawnLocations.get(args[0]) || spawnLocations.get("airField")
 }, false)
 
 
@@ -56,7 +56,7 @@ RegisterCommand("tp", (source: string, args: string[]) => {
 setImmediate(() => {
   emit('chat:addSuggestion', '/tp', 'teleport to a predefined location', [
     {
-      name: "location name", help: "the name of where you want to teleport to, the options are: lobbyspawn, smallport, mansion, bigport, warehouses, partyplace and north yankton"}
+      name: "location name", help: "the name of where you want to teleport to, the options are: lobbySpawn, smallPort, mansion, bigPort, wareHouses, partyPlace and northYankton"}
   ]);
 });
 
@@ -77,7 +77,7 @@ setImmediate(() => {
 // add chat suggestion for loadout
 setImmediate(() => {
   emit('chat:addSuggestion', '/loadout', 'equip a loadout', [
-    {name:"loadout name", help:"the name of the loadout. The options for DEA are: heavy, smg, silent, sniper and rpg. The options for narco are assault, military, silenced, explosive, longrange"},
+    {name:"loadout name", help:"the name of the loadout. The options for DEA are: heavy, smg, ninja, sniper and rpg. The options for narco are assault, military, ninja, explosive and sniper"},
     {name:"team name", help:"The name of the team you are currently on. Options are DEA or NARCO"}
   ]);
 });
@@ -85,11 +85,11 @@ setImmediate(() => {
 //teleport to cayo perico
 RegisterCommand("cayo", (source: string, args: string[]) => {
   emit("TXPVP:CORE:loadIsland")
-  Cfx.Game.PlayerPed.Position = spawnLocations.get(args[0]) || spawnLocations.get("airfield")
+  Cfx.Game.PlayerPed.Position = spawnLocations.get(args[0]) || spawnLocations.get("airField")
 }, false)
 
 // teleport to north yankton
 RegisterCommand("yankton", (source: string, args: string[]) => {
   emit("TXPVP:CORE:loadNorthYankton")
-  Cfx.Game.PlayerPed.Position = spawnLocations.get("northyankton")
+  Cfx.Game.PlayerPed.Position = spawnLocations.get("northYankton")
 }, false)

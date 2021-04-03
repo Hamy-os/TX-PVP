@@ -1,7 +1,7 @@
 import {Vector3} from "fivem-js"
 import { SpawnPoint } from "../../typings";
 export const DEA_SPAWNPOINTS: SpawnPoint[] = [
-  {name: "airfield", spawns: [
+  {name: "airField", spawns: [
     { pos: new Vector3(4315.5424804688, -4591.3286132812, 2.7156155109406), rot: 0.53692626953125 },
     { pos: new Vector3(4321.9291992188, -4591.6142578125, 2.5663135051727), rot: 343.73330688477 },
     { pos: new Vector3(4315.2412109375, -4586.3579101562, 3.9721603393555), rot: 340.4660949707 },
