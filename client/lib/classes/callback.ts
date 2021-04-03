@@ -26,7 +26,8 @@ export class ClientCallback {
     this.funcs.set(name, fn)
   }
   
-  public static triggerServerCallback<T>(name: string,  ...args: unknown[]): Promise<T> {
+  public static triggerServerCallback<T>(name: string, ...args: unknown[]): Promise<T> {
+    // TODO! Test with ...args
     return new Promise<T>((resolve, reject) => {
       emitNet(`TXPVP:CORE:sv_cb_trigger`, name, args)
       console.log("Triggered callback")
