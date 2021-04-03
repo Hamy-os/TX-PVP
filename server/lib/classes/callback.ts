@@ -9,13 +9,18 @@ export class ServerCallback {
       const src = source
       const fn = this.funcs.get(name)(src, args)
       const isPromise = fn instanceof Promise
-      if (isPromise) {
-        const ret = await fn
-        emitNet(`TXPVP:CORE:sv_cb_receive:${name}`, src, ret)
-      } else {
-        const ret = fn
-        emitNet(`TXPVP:CORE:sv_cb_receive:${name}`, src, ret)
+      try {
+        if (isPromise) {
+          const ret = await fn
+          emitNet(`TXPVP:CORE:sv_cb_receive:${name}`, src, ret)
+        } else {
+          const ret = fn
+          emitNet(`TXPVP:CORE:sv_cb_receive:${name}`, src, ret)
+        }
+      } catch (err) {
+        throw err
       }
+      
 
     })
   }

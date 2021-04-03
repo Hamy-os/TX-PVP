@@ -7,13 +7,18 @@ export class ClientCallback {
       const src = source
       const fn = this.funcs.get(name)(args)
       const isPromise = fn instanceof Promise
-      if (isPromise) {
-        const result = await fn
-        emitNet(`TXPVPV:CORE:cl_receive:${name}`, src, result)
-      } else {
-        const result = fn
-        emitNet(`TXPVPV:CORE:cl_receive:${name}`, src, result)
+      try {
+        if (isPromise) {
+          const result = await fn
+          emitNet(`TXPVPV:CORE:cl_receive:${name}`, src, result)
+        } else {
+          const result = fn
+          emitNet(`TXPVPV:CORE:cl_receive:${name}`, src, result)
+        }
+      } catch (err) {
+        throw err
       }
+      
     })
   }
 
