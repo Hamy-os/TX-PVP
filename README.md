@@ -6,7 +6,7 @@ if you wish to contribue that would be greatly appreciated!
 Want to help out? Well here is a list of what we need done!
 # FRONTEND
 
- - [ ] Pre loading: Queue with adaptive card thats lets you pick between free for all or pvp routing bucket as well as discord and website link 
+ - [X] Pre loading: Queue with adaptive card thats lets you pick between free for all or pvp routing bucket as well as discord and website link 
  - [ ] Loading: cool loading screen with music that is mutable and a keybinds/commands; credits and fun fact menus 
  - [ ] After load: A lobby that lets you see others that are also waiting, can not fight or get out of certain area if they do /join it opens the menu mentioned further
    - [ ] Lobby: menu that lets you choose between 6v6, 50v50 or 1v1 then submenu that lets you choose between cayo, yankton or extra, 
